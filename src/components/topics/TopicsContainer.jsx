@@ -3,11 +3,8 @@ import MainNav from '../navigation/MainNav'
 import Topic from './Topic'
 import {connect} from 'react-redux'
 import {getAllTopics} from '../../actions/TopicsActions'
-export class TopicsContainer extends Component {
 
-    // componentDidMount(){
-    
-    // }
+class TopicsContainer extends Component {
 
     render() {
         return (
