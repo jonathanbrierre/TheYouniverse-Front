@@ -1,5 +1,7 @@
 import React from 'react'
 import { Button, Form } from 'semantic-ui-react'
+import {connect} from 'react-redux'
+import {authenticateUser} from '../../actions/AuthActions'
 
 class Login extends React.Component {
     state = {
@@ -13,7 +15,25 @@ class Login extends React.Component {
 
     onSubmit = e => {
         e.preventDefault()
-        this.props.logInFunction(this.state)
+        fetch('http://localhost:3000/login',{
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                accept: 'application/json'
+            },
+            body: JSON.stringify(this.state)
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            console.log(data)
+            if(data.user){
+                localStorage.setItem('token', data.jwt)
+                this.props.authenticateUser(data)
+                this.props.history.push('/topics')
+            }else {
+                alert(data.message)
+            }
+        })
         this.setState({
             username: '',
             password: ''
@@ -35,4 +55,4 @@ class Login extends React.Component {
         )
     }
 }
-export default Login
+export default connect(null, {authenticateUser})(Login)
