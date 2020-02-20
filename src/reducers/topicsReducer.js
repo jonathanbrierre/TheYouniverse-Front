@@ -7,14 +7,22 @@ export default function topicsManager(state={
     switch(action.type){
         case 'POPULATE_TOPICS':
             return {...state, topics: action.payload}
+
         case 'GENERATE_TOPIC_POSTS':
-            return {...state, topicPosts: action.payload.reverse()}
+            return {...state, topicPosts: [...state.topicPosts, ...action.payload]}
+
         case 'SET_CHOSEN_TOPIC':
             return {...state, selectedTopic: action.payload}
         case 'SET_HEADING':
+
             return {...state, heading: action.payload}
         case 'NEW_POST':
+
             return {...state, topicPosts: [action.payload, ...state.topicPosts]}
+        
+        case 'UNMOUNT':
+
+            return{...state, topicPosts:[]}
         default: 
             return state
     }

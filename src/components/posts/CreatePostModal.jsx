@@ -2,11 +2,14 @@ import React, { Component } from 'react'
 import { Button, Header, Form, Modal } from 'semantic-ui-react'
 import {connect} from 'react-redux'
 import {createPost} from '../../actions/TopicsActions'
+import { Alert } from 'reactstrap'
 
 class CreatePostModal extends Component {
 
     state = {
-        content: ''
+        content: '',
+        alert: '',
+        alertStyle: {}
     }
 
     onChange = (e) => {
@@ -28,7 +31,14 @@ class CreatePostModal extends Component {
         })
             .then(resp => resp.json())
             .then(postObj => {
-                this.props.createPost(postObj)
+                if(postObj.id){
+                    this.props.createPost(postObj)
+                    this.setState({alert:'Successfully added a post', alertStyle: {color: 'green', textAlign: 'center'}})
+                    setTimeout(()=> this.setState({alert:''}), 3000)
+                } else {
+                    this.setState({alert:'Something went wrong. Check to see if you are logged in, or try again later.', alertStyle: {color: 'red', textAlign: 'center'}})
+                    setTimeout(()=> this.setState({alert:''}), 5000)
+                }
             })
     }
     render() {
@@ -43,6 +53,7 @@ class CreatePostModal extends Component {
                             <Form.Button>Submit</Form.Button>
                         </Form>
                     </Modal.Description>
+                        <div style={this.state.alertStyle} > {this.state.alert}</div>
                     </Modal.Content>
                 </Modal>
             </div>

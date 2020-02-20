@@ -10,6 +10,9 @@ export const createPost = newPostObj => {
     return {type: 'NEW_POST', payload: newPostObj}
 }
 
+export const removePosts = () => {
+    return { type: 'UNMOUNT'}
+}
 
 export const setHeading = (cappedSlug) => {
     return { type: 'SET_HEADING', payload: cappedSlug}
