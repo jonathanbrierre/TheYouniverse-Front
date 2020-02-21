@@ -8,7 +8,9 @@ import BottomScrollListener from 'react-bottom-scroll-listener';
 
 class TopicPostsCont extends Component {
     state = {
-        pageCounter: 1
+        pageCounter: 1,
+        loading: false,
+        endOfPosts: false
     }
 
     componentDidMount(){
@@ -27,9 +29,11 @@ class TopicPostsCont extends Component {
         .then(resp => resp.json())
         .then(allPosts => {
             if(allPosts){
+                this.setState({loading: false})
                 this.props.getPostsForTopic(allPosts)
                 this.props.setTopic(this.props.chosenTopic)
             } else{
+                this.setState({loading: false, endOfPosts: true})
                 console.log('end of posts')
             }
         })
@@ -41,25 +45,28 @@ class TopicPostsCont extends Component {
     }
 
     renderPosts =()=>{
-        // console.log(this.props.posts)
         return this.props.posts.map(post => <Post key = {post.id} post={post}/>)
     }
 
     incrementPageCounter = () => {
-        console.log(this.state.pageCounter)
-        let newCount = this.state.pageCounter +1 
-        this.setState({pageCounter: newCount}, this.fetchTopicPosts)
-        
+        if(this.state.endOfPosts !== true){
+            let newCount = this.state.pageCounter +1 
+            this.setState({pageCounter: newCount, loading: true}, this.fetchTopicPosts)
+        } else{
+            return 
+        }
     }
 
     render() {
         return (
         <BottomScrollListener onBottom={this.incrementPageCounter} >
             <div onScroll = {this.handleScroll}>
-            <MainNav/>
-                <h2>{this.props.heading}</h2>
+                <MainNav/>
+                <h1 style = {{textAlign: 'right', marginRight: '5%'}}>{this.props.heading}</h1>
                 <CreatePostModal/>
                 {this.renderPosts()}
+                {this.state.loading ? <h3>Loading...</h3>:null}
+                {this.state.endOfPosts ? <h3>No More Posts</h3>:null}
             </div>
             </BottomScrollListener>
         )

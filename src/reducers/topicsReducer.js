@@ -19,10 +19,20 @@ export default function topicsManager(state={
         case 'NEW_POST':
 
             return {...state, topicPosts: [action.payload, ...state.topicPosts]}
+        case 'UPDATE_POST':
+            console.log('triggered')
+            console.log(action.payload)
+            let updatedPosts = state.topicPosts.map(post => ( action.payload.id === post.id ? {...post, content: action.payload.content} : post))
+
+            return {...state, topicPosts: updatedPosts}
+        case 'DELETE_POST':
+            let filteredPosts = state.topicPosts.filter(post => post.id !== action.payload)
+            return {...state, topicPosts: filteredPosts}
         
         case 'UNMOUNT':
 
             return{...state, topicPosts:[]}
+
         default: 
             return state
     }

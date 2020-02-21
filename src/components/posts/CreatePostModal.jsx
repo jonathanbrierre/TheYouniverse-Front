@@ -43,8 +43,8 @@ class CreatePostModal extends Component {
     }
     render() {
         return (
-            <div>
-                <Modal trigger={<Button>Create Post</Button>} closeIcon>
+            <div className='modal'>
+                <Modal trigger={<Button >Create Post</Button>} closeIcon>
                     <Modal.Header>Create a Post</Modal.Header>
                     <Modal.Content >
                     <Modal.Description>

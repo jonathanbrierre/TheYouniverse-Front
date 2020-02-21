@@ -22,7 +22,7 @@ const MainNav = (props) => {
     }
     
     return (
-        <div>
+        <div style = {{backgroundColor: '#1b1c1d'}}>
             <Sidebar
                 as={Menu}
                 animation='overlay'
@@ -36,26 +36,29 @@ const MainNav = (props) => {
                     <Icon name='x'  /> 
                     Close
                 </Menu.Item>
-                <Menu.Item as='a'>
-                    <Icon name='address card outline' />
-                    Your Profile
-                </Menu.Item>
                 <Menu.Item as={Link} to ='/topics' onClick={onClickStore}>
                     <Icon name='list' />
                     Discussion Topics
                 </Menu.Item>
+                {props.token.length ? <Menu.Item as='a'>
+                    <Icon name='address card outline' />
+                    Your Profile
+                </Menu.Item> : null}
                 <Menu.Item as='a' onClick = {onClickLogOut}>
                     <Icon name='sign-out' />
-                    Sign Out
+                    {props.token.length ? 'Sign Out': 'Log In/Sign Up'}
                 </Menu.Item>
             </Sidebar>
-            <Button onClick = {onClickShow} icon = 'bars' size = 'massive' style= {{backgroundColor: 'white'}}></Button>
+            <Button onClick = {onClickShow} icon = 'bars' size = 'massive' style= {{backgroundColor: '#1b1c1d', color: 'white'}}></Button>
         </div>
     )
 }
 
 const mapStateToProps = state => {
-    return {display: state.navManager}
+    return {
+        display: state.navManager,
+        token: state.userManager.token
+    }
 }
 
 export default connect(mapStateToProps, {showNav, storeNav, logOutUser})(withRouter(MainNav))
