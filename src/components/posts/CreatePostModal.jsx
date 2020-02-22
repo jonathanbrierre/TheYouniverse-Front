@@ -2,14 +2,15 @@ import React, { Component } from 'react'
 import { Button, Header, Form, Modal } from 'semantic-ui-react'
 import {connect} from 'react-redux'
 import {createPost} from '../../actions/TopicsActions'
-import { Alert } from 'reactstrap'
+import Swal from 'sweetalert2'
 
 class CreatePostModal extends Component {
 
     state = {
         content: '',
         alert: '',
-        alertStyle: {}
+        alertStyle: {},
+        modalOpen: false
     }
 
     onChange = (e) => {
@@ -33,24 +34,33 @@ class CreatePostModal extends Component {
             .then(postObj => {
                 if(postObj.id){
                     this.props.createPost(postObj)
-                    this.setState({alert:'Successfully added a post', alertStyle: {color: 'green', textAlign: 'center'}})
-                    setTimeout(()=> this.setState({alert:''}), 3000)
+                    this.closeModal()
+                    Swal.fire({icon: 'success', text:'Successfully Created a Post'})
+                    this.setState({content:''})
                 } else {
-                    this.setState({alert:'Something went wrong. Check to see if you are logged in, or try again later.', alertStyle: {color: 'red', textAlign: 'center'}})
-                    setTimeout(()=> this.setState({alert:''}), 5000)
+                    Swal.fire({icon: 'Error', text:'Something went wrong. Check to see if you are logged in, or try again later.'})
                 }
             })
+    }
+
+    onClickModalOpen = () => {
+        this.setState({modalOpen:true})
+    }
+
+    closeModal = () => {
+        this.setState({modalOpen:false})
     }
     render() {
         return (
             <div className='modal'>
-                <Modal trigger={<Button >Create Post</Button>} closeIcon>
+                <Modal open ={this.state.modalOpen} trigger={<Button onClick ={this.onClickModalOpen} >Create Post</Button>} >
                     <Modal.Header>Create a Post</Modal.Header>
                     <Modal.Content >
                     <Modal.Description>
                         <Form onSubmit = {this.onSubmit}>
                             <Form.TextArea label='Post Content' name = 'content' placeholder="What's on your mind?" onChange ={this.onChange} value={this.state.content}/>
-                            <Form.Button>Submit</Form.Button>
+                            <Form.Button disabled ={this.state.content.length? false:true} style={{ display: 'inline-block'}}>Submit</Form.Button>
+                            <Button style={{backgroundColor: 'red', float:'right', marginBottom: '10px'}} onClick = {this.closeModal}>Close</Button>
                         </Form>
                     </Modal.Description>
                         <div style={this.state.alertStyle} > {this.state.alert}</div>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Comment from './Comment'
-import { Feed, Form, Button } from 'semantic-ui-react'
 import NewComment from './NewComment'
 class CommentsContainer extends Component {
 

@@ -40,7 +40,7 @@ export class NewComment extends Component {
         <div style ={{textAlign: 'right'}}>
             <Form onSubmit = {this.onSubmit}>
                 <Form.Input fluid type= 'text' placeholder= 'Leave a Comment' value= {this.state.newComment} onChange ={this.onChange} name='newComment' />
-                <Form.Button type='submit' style={{marginRight: '5px'}}>Submit</Form.Button>
+                <Form.Button disabled ={this.state.newComment.length? false:true}type='submit' style={{marginRight: '5px'}}>Submit</Form.Button>
             </Form>
         </div>
         )

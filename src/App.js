@@ -40,7 +40,6 @@ class App extends React.Component {
     let slug = routerProps.match.params.slug
     let chosenTopic = this.props.topicsManager.topics.find(topic => topic.slug === slug)
     if(chosenTopic){
-      // this.props.setTopic(chosenTopic)
       return <TopicPostsCont {...routerProps} chosenTopic ={chosenTopic} />
     }else {
       return <NotFound/>

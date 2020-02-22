@@ -1,10 +1,11 @@
 import React from 'react'
 import { Feed, Form, Button } from 'semantic-ui-react'
 
-
+import Swal from 'sweetalert2'
 import {connect}  from 'react-redux'
 import {editPost, deletePost} from '../../actions/TopicsActions'
 import CommentsContainer from './comments/CommentsContainer'
+import Like from './Like'
 class Post extends React.Component  {
 
     state = {
@@ -18,11 +19,7 @@ class Post extends React.Component  {
         .then(r=>r.json())
         .then(data => {
             this.props.deletePost(this.props.post.id)
-            //Make this pretty later
-            //Make this pretty later
-            alert(data.message)
-            //Make this pretty later
-            //Make this pretty later
+            Swal.fire({icon: 'success', text:'Successfully Deleted'})
         })
     }
 
@@ -45,7 +42,6 @@ class Post extends React.Component  {
 
     onSubmitEdit = (e) => {
         e.preventDefault()
-        console.log('submitted')
         fetch(`http://localhost:3000/posts/${this.props.post.id}`,{
             method: 'PATCH',
             headers:{
@@ -57,6 +53,7 @@ class Post extends React.Component  {
         })
             .then(resp => resp.json())
             .then(data =>{
+                Swal.fire({icon: 'success', text:'Successful Edit'})
                 this.props.editPost(data)
                 this.setState({editBool: false})
             })
@@ -78,7 +75,7 @@ class Post extends React.Component  {
     renderButtons = () =>{
         return(
             <div>
-                <p className='postConfig' onClick={this.onClickViewComments}>{this.state.showComments ? 'Close Comments':'View Comments'}</p><br></br><p className='postConfig' onClick = {this.deletePostFetch}>Delete</p> {'|'} <p className='postConfig' onClick = {this.onClickEdit}>Edit Post</p>
+                <p className='postConfig' onClick = {this.deletePostFetch}>Delete</p> {'|'} <p className='postConfig' onClick = {this.onClickEdit}>Edit Post</p>
             </div>
         )
     }
@@ -88,13 +85,18 @@ class Post extends React.Component  {
     render(){
         return (
         <div className = 'postDiv'>
-            <Feed.Event>
-                <Feed.Label image='/images/avatar/small/joe.jpg' />
+            <Feed>
+                {/* <div style= {{backgroundColor: '#1b1c1d'}}> */}
+                <Feed.Event style={{backgroundColor: '#1b1c1d', padding: '7px', borderRadius: '3%', color: 'white' }} image='https://www.biography.com/.image/t_share/MTY2NTIzMDQzOTIzODk1NTM4/oprah-photo-by-vera-anderson_wireimage.jpg'  content = 'put more stuff here'/>
+                {/* </div> */}
                     <h4 className = 'postHeader'> {this.props.post.user.username} posted to {this.props.post.topic.name}</h4>
                     {this.state.editBool ? this.renderEditForm():<p>{this.props.post.content}</p>}
+                    <hr></hr>
+                    <Like post = {this.props.post} token = {this.props.token} user={this.props.currentUser}/>
+                    <div className = 'viewComment'><p className='postConfig' style={{textAlign: 'right'}} onClick={this.onClickViewComments}>{this.state.showComments ? 'Close Comments':'View Comments'}</p> </div>
                     {this.props.currentUser.id === this.props.post.user.id ? <div className='postConfigContainer'>{this.state.editBool ? <p className='postConfig' onClick ={this.onClickCloseEdit}>Close Edit</p>:this.renderButtons()}</div>: null}
                     {this.state.showComments ? <CommentsContainer post ={this.props.post}/>:null}
-            </Feed.Event>   
+            </Feed>   
         </div>
     )}
 }

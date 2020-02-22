@@ -7,7 +7,7 @@ export class Comment extends Component {
         return (
             <Feed>
                 <Feed.Event
-                image='/images/avatar/small/elliot.jpg'
+                image='https://www.biography.com/.image/t_share/MTY2NTIzMDQzOTIzODk1NTM4/oprah-photo-by-vera-anderson_wireimage.jpg'
                 content={ <div><h5>{this.props.comment.user.username} said</h5> {this.props.comment.content} </div>}
                 />
             </Feed>

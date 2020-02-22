@@ -30,3 +30,13 @@ export const deletePost = id => {
 export const editPost = editedPostObj => {
     return {type: 'UPDATE_POST', payload: editedPostObj}
 }
+
+//Likes
+
+export const addLike = (postId, likeObj) => {
+    return {type: 'ADD_LIKE', payload: { postId, likeObj}}
+}
+
+export const removeLike = (postId, likeId) => {
+    return {type:'UNLIKE', payload:{postId, likeId}}
+}
