@@ -68,9 +68,9 @@ export class Like extends Component {
 
     render() {
         return (
-            <div>
+            <div style ={{transform: 'translate(20px, 20px)', width: '30%', textAlign: 'center'}}>
                 {this.renderLikeCount()}<br></br>
-                {this.state.liked ? <Icon name='heart' size='big' style = {{color:'red', cursor: 'pointer'}} onClick = {this.onClickLike} />: <Icon name='heart outline' style = {{cursor: 'pointer'}} size='big' onClick = {this.onClickLike} />}
+                {this.state.liked ? <Icon name='heart' size='big' style = {{color:'red', cursor: 'pointer'}} onClick = {this.onClickLike} />: <Icon name='heart outline' style = {{cursor: 'pointer', display: 'inline-block'}} size='big' onClick = {this.onClickLike} />}
             </div>
         )
     }
