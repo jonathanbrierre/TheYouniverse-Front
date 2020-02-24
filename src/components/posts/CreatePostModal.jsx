@@ -55,15 +55,12 @@ class CreatePostModal extends Component {
             <div className='modal'>
                 <Modal open ={this.state.modalOpen} trigger={<Button onClick ={this.onClickModalOpen} >Create Post</Button>} >
                     <Modal.Header>Create a Post</Modal.Header>
-                    <Modal.Content >
-                    <Modal.Description>
+                    <Modal.Content >                
                         <Form onSubmit = {this.onSubmit}>
                             <Form.TextArea label='Post Content' name = 'content' placeholder="What's on your mind?" onChange ={this.onChange} value={this.state.content}/>
                             <Form.Button disabled ={this.state.content.length? false:true} style={{ display: 'inline-block'}}>Submit</Form.Button>
                             <Button style={{backgroundColor: 'red', float:'right', marginBottom: '10px'}} onClick = {this.closeModal}>Close</Button>
                         </Form>
-                    </Modal.Description>
-                        <div style={this.state.alertStyle} > {this.state.alert}</div>
                     </Modal.Content>
                 </Modal>
             </div>

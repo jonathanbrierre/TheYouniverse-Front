@@ -10,6 +10,9 @@ export default function userManager(state = initialState, action){
         case 'LOG_OUT':
             return initialState
             
+        case 'EDIT':
+            
+            return {...state, userObj:{...state.userObj, ...action.payload}}
         default:
             return state
     }

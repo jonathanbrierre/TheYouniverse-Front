@@ -21,6 +21,7 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "semantic-ui-react": "^0.88.2",
+    "sweetalert": "^2.1.2",
     "sweetalert2": "^9.8.1"
   },
   "scripts": {

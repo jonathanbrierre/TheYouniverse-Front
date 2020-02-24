@@ -39,8 +39,8 @@ export class NewComment extends Component {
         return (
         <div style ={{textAlign: 'right'}}>
             <Form onSubmit = {this.onSubmit}>
-                <Form.Input fluid type= 'text' placeholder= 'Leave a Comment' value= {this.state.newComment} onChange ={this.onChange} name='newComment' />
-                <Form.Button disabled ={this.state.newComment.length? false:true}type='submit' style={{marginRight: '5px'}}>Submit</Form.Button>
+                <Form.TextArea  type= 'text' placeholder= 'Leave a Comment' value= {this.state.newComment} onChange ={this.onChange} name='newComment' />
+                <Form.Button disabled ={this.state.newComment.length? false:true}type='submit' style={{marginRight: '15px'}}>Submit</Form.Button>
             </Form>
         </div>
         )

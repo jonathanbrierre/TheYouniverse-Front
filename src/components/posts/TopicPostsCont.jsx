@@ -62,11 +62,14 @@ class TopicPostsCont extends Component {
         <BottomScrollListener onBottom={this.incrementPageCounter} >
             <div>
                 <MainNav/>
-                <h1 style = {{textAlign: 'right', marginRight: '5%'}}>{this.props.heading}</h1>
-                <CreatePostModal/>
-                {this.renderPosts()}
-                {this.state.loading ? <h3>Loading...</h3>:null}
-                {this.state.endOfPosts ? <h3>No More Posts</h3>:null}
+                <div style = {{ position: 'relative', top: '10vh'}}>
+                    <h1 style = {{textAlign: 'right', marginRight: '5%'}}>{this.props.heading}</h1>
+                    <CreatePostModal/>
+                    {this.renderPosts()}
+                    {this.state.loading ? <h3>Loading...</h3>:null}
+                    {this.state.endOfPosts ? <h3>No More Posts</h3>:null}
+
+                </div>
             </div>
         </BottomScrollListener>
         )

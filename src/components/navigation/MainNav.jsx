@@ -22,7 +22,7 @@ const MainNav = (props) => {
     }
     
     return (
-        <div style = {{backgroundColor: '#1b1c1d'}}>
+        <div style = {{backgroundColor: '#1b1c1d'}} className = 'navBar'>
             <Sidebar
                 as={Menu}
                 animation='overlay'
@@ -39,8 +39,8 @@ const MainNav = (props) => {
                 <Menu.Item as={Link} to ='/topics' onClick={onClickStore}>
                     <Icon name='list' />
                     Discussion Topics
-                </Menu.Item>
-                {props.token.length ? <Menu.Item as='a'>
+                </Menu.Item >
+                {props.token.length ? <Menu.Item as={Link} to ={`/profile/${props.user.id}`} onClick={onClickStore}>
                     <Icon name='address card outline' />
                     Your Profile
                 </Menu.Item> : null}
@@ -57,7 +57,8 @@ const MainNav = (props) => {
 const mapStateToProps = state => {
     return {
         display: state.navManager,
-        token: state.userManager.token
+        token: state.userManager.token,
+        user: state.userManager.userObj
     }
 }
 

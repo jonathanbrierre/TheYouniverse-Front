@@ -25,13 +25,33 @@ class CommentsContainer extends Component {
         this.setState({comments: [...this.state.comments, commentObj]})
     }
 
+    removeCommentFromState = (id) => {
+        let comments = [...this.state.comments]
+        let newComments = comments.filter(comment => comment.id !== id)
+        this.setState({comments: newComments})
+    }
+
+    updateComment = (commentObj)=>{
+        // console.log(commentObj)
+        let comments = [...this.state.comments]
+        let newComments = comments.map(comment => {
+            if(comment.id === commentObj.id){
+                return commentObj
+            }else{
+                return comment
+            }
+        })
+        this.setState({comments: newComments})
+
+    }
+
     render() {
         return (
             <div >
                 <div style={{height: '50vh', overflow: 'scroll'}}>
-                    {this.state.comments.map(comment => <Comment key={comment.id} comment = {comment}/>)}
+                    {this.state.comments.map(comment => <Comment key={comment.id} comment = {comment} updateComment = {this.updateComment} removeCommentFromState = {this.removeCommentFromState}/>)}
                 </div>
-                <NewComment post = {this.props.post} addComment = {this.addComment}/>
+                <NewComment post = {this.props.post} addComment = {this.addComment} />
             </div>
         )
     }

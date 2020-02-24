@@ -11,6 +11,7 @@ import {withRouter} from 'react-router-dom'
 import {Route, Switch} from 'react-router-dom'
 import TopicPostsCont from './components/posts/TopicPostsCont';
 import NotFound from './NotFound';
+import UserProfileContainer from './components/profile/UserProfileContainer';
 
 
 class App extends React.Component {
@@ -46,6 +47,8 @@ class App extends React.Component {
     }
   }
 
+
+
   render(){
     return (
     <div className="App">
@@ -53,6 +56,7 @@ class App extends React.Component {
           <Route exact path='/' render = { routerProps => <Home {...routerProps}/>}/>
           <Route exact path = '/topics' render = {routerProps => <TopicsContainer {...routerProps}/>} />
           <Route path = '/topics/:slug' render = {this.renderTopicPosts} />
+          <Route path = '/profile/:id' render = {routerProps => <UserProfileContainer {...routerProps} />} />
           <Route component = {NotFound} />
         </Switch>
     </div>

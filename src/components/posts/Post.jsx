@@ -87,14 +87,14 @@ class Post extends React.Component  {
         <div className = 'postDiv'>
             <Feed>
                
-                <Feed.Event style={{backgroundColor: '#1b1c1d', padding: '7px', borderRadius: '3%', color: 'white' }} image='https://www.biography.com/.image/t_share/MTY2NTIzMDQzOTIzODk1NTM4/oprah-photo-by-vera-anderson_wireimage.jpg'  content = 'put more stuff here'/>
+                <Feed.Event style={{backgroundColor: '#1b1c1d', padding: '7px', color: 'white' }}  image={this.props.post.user.avatar}  content = {`@${this.props.post.user.username}`}/>
 
-                    <h4 className = 'postHeader'> {this.props.post.user.username} posted to {this.props.post.topic.name}</h4>
-                    {this.state.editBool ? this.renderEditForm():<p>{this.props.post.content}</p>}
-                    <hr></hr>
+                    <h4 className = 'postHeader'> {`${this.props.post.user.first_name} ${this.props.post.user.last_name}`} posted</h4>
+                    {this.state.editBool ? this.renderEditForm():<p className = 'postContent'>{this.props.post.content}</p>}
+                        <hr></hr>
                     <Like post = {this.props.post} token = {this.props.token} user={this.props.currentUser}/>
                     <div className = 'viewComment'>
-                        <p className='postConfig' style={{textAlign: 'right'}} onClick={this.onClickViewComments}>{this.state.showComments ? 'Close Comments':'View Comments'}</p>
+                        <p className='postConfig' style={{textAlign: 'right'}} onClick={this.onClickViewComments}>{this.state.showComments ? 'Close Comments':'View or Post Comments'}</p>
                     </div>
                     {this.props.currentUser.id === this.props.post.user.id ? <div className='postConfigContainer'>{this.state.editBool ? <p className='postConfig' onClick ={this.onClickCloseEdit}>Close Edit</p>:this.renderButtons()}</div>: null}
                     {this.state.showComments ? <CommentsContainer post ={this.props.post}/>:null}
