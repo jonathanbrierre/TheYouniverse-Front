@@ -5,6 +5,7 @@ import Swal from 'sweetalert2'
 import swal from 'sweetalert'
 import {editUserInfo, logOutUser} from '../../actions/AuthActions'
 import {withRouter} from 'react-router-dom'
+import { FollowingCard } from './FollowingCard'
 
 class Profile extends Component {
 
@@ -17,6 +18,10 @@ class Profile extends Component {
         bio: ''
     }
 
+    // componentDidMount(){
+    //     debugger
+    //     console.log(this.props.user)
+    // }
     fillEditForm = ()=> {
         this.setState({
             username: this.props.user.username,
@@ -85,7 +90,16 @@ class Profile extends Component {
           });
     }
 
+    displayFollowees = () => {
+        if(this.props.user.id){
+            return (this.props.user.followees.map( followee =>  <FollowingCard  key = {followee.id}followee ={followee}/> ))
+        }else{
+            return 
+        }
+    }
+
     render() {
+        console.log(this.props.user)
         return (
             <div>
                 <div className = 'profileDiv'>
@@ -122,6 +136,8 @@ class Profile extends Component {
                             </Modal.Content>
                         </Modal>
                     </div>
+                    <p>Following: </p>
+                                <div>{this.displayFollowees()}</div>
                 </div>
             </div>
         )
