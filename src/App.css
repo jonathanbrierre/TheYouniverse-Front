@@ -5,9 +5,7 @@
     margin-top: 10px;
     margin-bottom: 10px;
     margin-left: auto;
-    margin-right: auto;
-    
-                            
+    margin-right: auto;                 
 }
 
 .navBar{
@@ -64,7 +62,7 @@
     width: 70%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 10vh;
+    margin-top: 100px;
     border: solid 1px;
     text-align: center;
 }
@@ -98,3 +96,40 @@
     width: 20vw;
     margin: 0px
 }
+
+.homeAuth:hover{
+    cursor:pointer;
+    color: red
+}
+
+.thisDiv{
+    text-align: center;
+    height: 100vh;
+    width: 100%;
+    background-color: black;
+    background-image: url('https://media0.giphy.com/media/l3q2Xl2Rd8wZfMCaI/source.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.homeDiv{
+    color:white;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0);
+    padding: 5vw;
+    border-radius: 20%
+}
+
+
+.labels {
+    height: 50px
+}
+.ui.form .field.labels>label {
+    color:white
+}
+
+
+

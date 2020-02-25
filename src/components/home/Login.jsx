@@ -44,10 +44,10 @@ class Login extends React.Component {
             <div>
                 <hr></hr>
                 <h3>Log In:</h3> 
-                <Form onSubmit = {this.onSubmit}>
+                <Form onSubmit = {this.onSubmit} >
                     <Form.Group widths='equal'>
-                        <Form.Input fluid label='Username' type= 'text' name='username' onChange ={this.onChange} value={this.state.username}/>
-                        <Form.Input fluid label='Password' type = 'password' name = 'password' onChange = {this.onChange} value = {this.state.password} />
+                        <Form.Input fluid   className="labels" label='Username' type= 'text' name='username' onChange ={this.onChange} value={this.state.username}/>
+                        <Form.Input fluid className="labels" label='Password' type = 'password' name = 'password' onChange = {this.onChange} value = {this.state.password} />
                     </Form.Group>
                     <Button type ='submit'>Submit</Button>
                 </Form>
