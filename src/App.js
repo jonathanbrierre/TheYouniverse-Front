@@ -12,6 +12,7 @@ import {Route, Switch} from 'react-router-dom'
 import TopicPostsCont from './components/posts/TopicPostsCont';
 import NotFound from './NotFound';
 import UserProfileContainer from './components/profile/UserProfileContainer';
+import ConversationContainer from './components/messenger/ConversationContainer';
 
 
 class App extends React.Component {
@@ -57,7 +58,7 @@ class App extends React.Component {
           <Route exact path = '/topics' render = {routerProps => <TopicsContainer {...routerProps}/>} />
           <Route path = '/topics/:slug' render = {this.renderTopicPosts} />
           <Route  path = '/profile/:id' render = {routerProps => <UserProfileContainer {...routerProps} />} />
-          {/* <Route  path = '/profile/:id' render = {routerProps => <UserProfileContainer {...routerProps} />} /> */}
+          <Route path = '/messenger' render = {()=> <ConversationContainer/>} />
           <Route path = '/notFound' component = {NotFound} />
           <Route component = {NotFound} />
         </Switch>
