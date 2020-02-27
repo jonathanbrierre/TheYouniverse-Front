@@ -7,11 +7,14 @@ const NotFound = (props) => {
     const setTopic = () => {
         props.setTopic({})
     }
+    
     return (
-        <div>
-            {setTopic()}
+        <div  >
+            {/* {setTopic()} */}
             <MainNav/>
-            Nothing to See Here
+            <div className ='notFoundContainer'>
+                <h1>Welcome to the void. There is nothing to see here</h1>
+            </div>
         </div>
     )
 }

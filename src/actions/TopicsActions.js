@@ -31,6 +31,10 @@ export const editPost = editedPostObj => {
     return {type: 'UPDATE_POST', payload: editedPostObj}
 }
 
+export const getUser = (postId, userId) => {
+    return{type: 'GET_USER', payload: {postId, userId}}
+}
+
 //Likes
 
 export const addLike = (postId, likeObj) => {

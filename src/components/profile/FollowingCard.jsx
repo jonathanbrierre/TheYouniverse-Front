@@ -2,11 +2,19 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 export class FollowingCard extends Component {
+
+    displayFollowings = () =>{
+        if(this.props.followee){
+            return (<h5>{this.props.followee.username}</h5>)
+        }else if(this.props.follower){
+            return (<h5>{this.props.follower.username}</h5>)
+        }
+    }
     render() {
-        console.log(this.props.followee)
+        console.log(this.props)
         return (
             <div> 
-                <h5>{this.props.followee.username}</h5>
+                {this.displayFollowings()}
             </div>
         )
     }

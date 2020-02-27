@@ -2,7 +2,8 @@ import React from 'react'
 import { Icon, Menu, Sidebar, Button } from 'semantic-ui-react'
 import {connect} from 'react-redux'
 import {showNav, storeNav} from '../../actions/NavActions'
-import {logOutUser} from '../../actions/AuthActions'
+import {logOutUser, unselectUser} from '../../actions/AuthActions'
+
 import {withRouter, Link} from 'react-router-dom'
 
 const MainNav = (props) => {
@@ -40,7 +41,7 @@ const MainNav = (props) => {
                     <Icon name='list' />
                     Discussion Topics
                 </Menu.Item >
-                {props.token.length ? <Menu.Item as={Link} to ={`/profile/${props.user.id}`} onClick={onClickStore}>
+                {props.token.length ? <Menu.Item as={Link} to ={`/profile/${props.user.id}`} onClick={() => {onClickStore(); props.unselectUser()}}>
                     <Icon name='address card outline' />
                     Your Profile
                 </Menu.Item> : null}
@@ -62,4 +63,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {showNav, storeNav, logOutUser})(withRouter(MainNav))
+export default connect(mapStateToProps, {showNav, storeNav, logOutUser, unselectUser})(withRouter(MainNav))

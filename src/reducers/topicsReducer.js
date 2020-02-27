@@ -14,12 +14,13 @@ export default function topicsManager(state={
 
         case 'SET_CHOSEN_TOPIC':
             return {...state, selectedTopic: action.payload}
-        case 'SET_HEADING':
 
+        case 'SET_HEADING':
             return {...state, heading: action.payload}
         case 'NEW_POST':
 
             return {...state, topicPosts: [action.payload, ...state.topicPosts]}
+
         case 'UPDATE_POST':
             let updatedPosts = state.topicPosts.map(post => ( action.payload.id === post.id ? {...post, content: action.payload.content} : post))
 

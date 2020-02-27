@@ -4,6 +4,8 @@ import { Feed, Form, Button } from 'semantic-ui-react'
 import Swal from 'sweetalert2'
 import {connect}  from 'react-redux'
 import {editPost, deletePost} from '../../actions/TopicsActions'
+import {selectUser} from '../../actions/AuthActions'
+import {Link} from 'react-router-dom'
 import CommentsContainer from './comments/CommentsContainer'
 import Like from './Like'
 class Post extends React.Component  {
@@ -80,14 +82,21 @@ class Post extends React.Component  {
         )
     }
 
+    onClickProfile = () => {
+        // console.log(this.props)
+        fetch(`http://localhost:3000/profile/${this.props.post.user.id}`)
+        .then(resp=> resp.json())
+        .then(this.props.selectUser)
+    }
+
 
 
     render(){
+        console.log(this.props.post.user)
         return (
         <div className = 'postDiv'>
             <Feed>
-               
-                <Feed.Event style={{backgroundColor: '#1b1c1d', padding: '7px', color: 'white' }}  image={this.props.post.user.avatar}  content = {`@${this.props.post.user.username}`}/>
+                <Feed.Event style={{backgroundColor: '#1b1c1d', padding: '7px', color: 'white' }}  image={this.props.post.user.avatar}  content = {<Link to= {`/profile/${this.props.post.user.id}`} style = {{color: 'red'}} onClick = {this.onClickProfile} >@{this.props.post.user.username}</Link>}/>
 
                     <h4 className = 'postHeader'> {`${this.props.post.user.first_name} ${this.props.post.user.last_name}`} posted</h4>
                     {this.state.editBool ? this.renderEditForm():<p className = 'postContent'>{this.props.post.content}</p>}
@@ -110,4 +119,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, {editPost, deletePost})(Post)
+export default connect(mapStateToProps, {editPost, deletePost, selectUser})(Post)

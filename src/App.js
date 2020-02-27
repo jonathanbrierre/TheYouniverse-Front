@@ -35,6 +35,8 @@ class App extends React.Component {
         fetch('http://localhost:3000/topics')
           .then(resp => resp.json())
           .then(this.props.getAllTopics)
+          console.log('hello');
+          
   }
 
   renderTopicPosts = (routerProps) =>{
@@ -47,8 +49,6 @@ class App extends React.Component {
     }
   }
 
-
-
   render(){
     return (
     <div className="App">
@@ -56,7 +56,9 @@ class App extends React.Component {
           <Route exact path='/' render = { routerProps => <Home {...routerProps}/>}/>
           <Route exact path = '/topics' render = {routerProps => <TopicsContainer {...routerProps}/>} />
           <Route path = '/topics/:slug' render = {this.renderTopicPosts} />
-          <Route path = '/profile/:id' render = {routerProps => <UserProfileContainer {...routerProps} />} />
+          <Route  path = '/profile/:id' render = {routerProps => <UserProfileContainer {...routerProps} />} />
+          {/* <Route  path = '/profile/:id' render = {routerProps => <UserProfileContainer {...routerProps} />} /> */}
+          <Route path = '/notFound' component = {NotFound} />
           <Route component = {NotFound} />
         </Switch>
     </div>

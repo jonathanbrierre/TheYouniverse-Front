@@ -132,4 +132,17 @@
 }
 
 
+.notFoundContainer{
+    text-align: center;
+    height: 100vh;
+    width: 100%;
+    background-image: url('https://media3.giphy.com/media/11y8rPp6vFIciA/source.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    color:white
+    /* background-image: url('https://media0.giphy.com/media/l3q2Xl2Rd8wZfMCaI/source.gif'); */
+}
 
+.notFoundContainer h1{
+    padding-top: 15vh;
+}

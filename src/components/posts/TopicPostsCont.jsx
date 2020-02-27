@@ -68,7 +68,6 @@ class TopicPostsCont extends Component {
                     {this.renderPosts()}
                     {this.state.loading ? <h3>Loading...</h3>:null}
                     {this.state.endOfPosts ? <h3>No More Posts</h3>:null}
-
                 </div>
             </div>
         </BottomScrollListener>
@@ -76,11 +75,10 @@ class TopicPostsCont extends Component {
     }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return {
         posts: state.topicsManager.topicPosts,
         heading: state.topicsManager.heading
-
     }
 }
 

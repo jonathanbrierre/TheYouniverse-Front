@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 import { Button, Form, Modal } from 'semantic-ui-react'
 import Swal from 'sweetalert2'
 import swal from 'sweetalert'
-import {editUserInfo, logOutUser} from '../../actions/AuthActions'
+import {editUserInfo, logOutUser, handleUnfollow, handleFollow} from '../../actions/AuthActions'
 import {withRouter} from 'react-router-dom'
 import { FollowingCard } from './FollowingCard'
+// import state from 'sweetalert/typings/modules/state'
 
 class Profile extends Component {
 
@@ -15,13 +16,11 @@ class Profile extends Component {
         email: '',
         first_name: '',
         last_name: '',
-        bio: ''
+        bio: '',
+        followee: false
     }
 
-    // componentDidMount(){
-    //     debugger
-    //     console.log(this.props.user)
-    // }
+
     fillEditForm = ()=> {
         this.setState({
             username: this.props.user.username,
@@ -72,22 +71,22 @@ class Profile extends Component {
             icon: "warning",
             buttons: true,
             dangerMode: true,
-          })
-          .then((willDelete) => {
+        })
+        .then((willDelete) => {
             if (willDelete) {
                 fetch(`http://localhost:3000/users/${this.props.user.id}`, {method: 'DELETE', headers:{'Authorization': `bearer ${this.props.token}`}})
-                     .then(resp=> resp.json())
-                     .then(data => {
-                         localStorage.clear()
-                         this.props.logOutUser()
-                         this.props.history.push('/')
-                         swal("Poof! Your profile has been deleted!", {icon: "success"});
-                     })
+                    .then(resp=> resp.json())
+                    .then(data => {
+                        localStorage.clear()
+                        this.props.logOutUser()
+                        this.props.history.push('/')
+                        swal("Poof! Your profile has been deleted!", {icon: "success"});
+                    })
             } else {
-                console.log(this.props)
-              swal("Your profile is safe!");
+                // console.log(this.props)
+            swal("Your profile is safe!");
             }
-          });
+        });
     }
 
     displayFollowees = () => {
@@ -98,8 +97,57 @@ class Profile extends Component {
         }
     }
 
+    displayFollowers = () => {
+        if(this.props.user.id){
+            // console.log(this.props.user)
+            return (this.props.user.followers.map( follower =>  <FollowingCard  key = {follower.id} follower ={follower}/> ))
+        }else{
+            return 
+        }
+    }
+
+    displayFollowButton =() =>{
+        if(this.props.thisUser){
+            if( this.props.thisUser.id !== this.props.currentUser.id){
+                return (
+                    <div>
+                        <button onClick = {this.onClickFollowing}>{this.props.followee ? 'Unfollow':'Follow'}</button>
+                    </div>
+                )
+            }
+        }else{
+            return 
+        }
+    }
+
+    onClickFollowing = () => {
+        if(this.props.followee){
+            fetch(`http://localhost:3000/followings/${this.props.followeeObj.id}`, {method: 'DELETE', headers:{'Authorization': `bearer ${this.props.userToken}`}})
+            .then(resp => resp.json())
+            .then(data => {
+                this.props.handleUnfollow(this.props.followeeObj, this.props.currentUser)
+            })
+        }else{
+            fetch(`http://localhost:3000/followings`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `bearer ${this.props.userToken}`,
+                    'content-type': 'application/json',
+                    'accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    followee_id: this.props.user.id
+                })
+            })
+            .then(resp=>resp.json())
+            .then(data =>{
+                console.log(data)
+                this.props.handleFollow(data, this.props.currentUser)
+            })
+        }
+    }
+
     render() {
-        console.log(this.props.user)
         return (
             <div>
                 <div className = 'profileDiv'>
@@ -108,7 +156,6 @@ class Profile extends Component {
                         <h2>{this.props.user.first_name}{' '}{this.props.user.last_name}</h2>
                         <br></br>
                         <h4 className ='username'>Username:</h4> <p>{this.props.user.username}</p>
-                        
                     </div>
                     <div className = 'profileInfoDivTwo'>
                         <h4 className ='email'>Email:</h4> <p>{this.props.user.email}</p>
@@ -117,8 +164,8 @@ class Profile extends Component {
                         <h4 className = 'bio'>Your Bio:</h4> <p>{this.props.user.bio}</p>
                     </div>
                     <div className = 'buttonDiv'>
-                        <Button style ={{textAlign: 'left'}} onClick = {() => {this.toggleModal(); this.fillEditForm()}}>Edit Profile</Button>
-                        <Button style ={{textAlign: 'left', backgroundColor: 'red'}} onClick ={this.deletePrompt} >Delete Profile</Button>
+                    {this.props.token ? <><Button style ={{textAlign: 'left'}} onClick = {() => {this.toggleModal(); this.fillEditForm()}}>Edit Profile</Button>
+                        <Button style ={{textAlign: 'left', backgroundColor: 'red'}} onClick ={this.deletePrompt} >Delete Profile</Button></>: null}
                         <Modal open ={this.state.editBool} >
                             <Modal.Header>Edit Your Profile</Modal.Header>
                             <Modal.Content >
@@ -129,15 +176,16 @@ class Profile extends Component {
                                     <Form.Input label = 'Last Name' name = 'last_name' value = {this.state.last_name} onChange={this.onChangeForm}/>
                                     <Form.TextArea label = 'Bio' name = 'bio' value = {this.state.bio} onChange={this.onChangeForm}/>
                                     <Form.Button type = 'submit' >Submit</Form.Button>
-                                    {/* <Form.TextArea style = {{height: '6vh'}} type= 'text'  value= {this.state.edit} onChange ={this.onChangeEdit} name='edit' />
-                                    <Form.Button disabled ={this.state.edit.length? false:true} style={{ display: 'inline-block'}}>Submit</Form.Button> */}
                                     <Button style={{backgroundColor: 'red', float:'right', marginBottom: '10px'}} onClick = {this.toggleModal}>Close</Button>
                                 </Form>
                             </Modal.Content>
                         </Modal>
                     </div>
+                    {this.displayFollowButton()}
                     <p>Following: </p>
                                 <div>{this.displayFollowees()}</div>
+                    <p>Followers:</p>
+                    <div>{this.displayFollowers()}</div>
                 </div>
             </div>
         )
@@ -145,5 +193,31 @@ class Profile extends Component {
 }
 
 
+const mapStateToProps =(state, ownProps) => {
+    if(state.userManager.userObj.id){
+        let followee = state.userManager.userObj.followees.some(followee => followee.id === ownProps.user.id)
+        let followeeObj = state.userManager.userObj.followees.find(followee => followee.id === ownProps.user.id)
+        if(followee){
+            console.log('hello')
+            return {
+                currentUser: state.userManager.userObj,
+                thisUser: ownProps.user,
+                userToken: state.userManager.token,
+                followee,
+                followeeObj
+            }
+        }else{
+            console.log('goodbye')
+            return {
+                currentUser: state.userManager.userObj,
+                thisUser: ownProps.user,
+                userToken: state.userManager.token,
+                followee
+            }
+        }
+    }
 
-export default connect(null, {editUserInfo, logOutUser})(withRouter(Profile))
+}
+
+
+export default connect(mapStateToProps, {editUserInfo, logOutUser, handleUnfollow, handleFollow})(withRouter(Profile))
