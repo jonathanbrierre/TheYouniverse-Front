@@ -149,9 +149,12 @@
 
 .listDiv{
     border-top: solid 2px black;
-    border-bottom: solid 2px black;
+    
+    width: 60vw;
     height: 50vh;
-    overflow: scroll
+    overflow: scroll;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .listItem{
@@ -162,4 +165,10 @@
 .listItem:hover{
     opacity: .7;
     cursor: pointer
+}
+
+.messageForm{
+    width: 60vw;
+    margin-left: auto;
+    margin-right: auto;
 }

@@ -3,25 +3,29 @@ import MainNav from '../navigation/MainNav'
 import UserListContainer from './Lists/UserListContainer'
 
 import {connect} from 'react-redux'
+import { MessagesContainer } from './Messages/MessagesContainer';
 
 
 
 class ConversationContainer extends Component {
 
-    componentDidMount(){
-        console.log(!!this.props.match.params.id);
+    showListOrMessages = () => {
+        if(this.props.user.id){
+            if(this.props.match.params.id){
+                return (<MessagesContainer convoId = {this.props.match.params.id}/>)
+            }else{
+                return (<UserListContainer user = {this.props.user} token = {this.props.token}/>)
+            }
+        }else{
+            return null
+        }
     }
-
-    // showListOrMessages = () => {
-
-    // }
 
     render() {
         return (
             <div>
-                {/* {this.renderConvos()} */}
                 <MainNav/>
-                {this.props.user.id ? <UserListContainer user = {this.props.user} token = {this.props.token}/>: null}
+                {this.showListOrMessages()}
             </div>
         )
     }
