@@ -4,22 +4,25 @@ import { connect } from 'react-redux'
 class Message extends Component {
 
     renderMessageDiv = () => {
-        if(this.props.message.user.id === this.props.currentUser.id){
-            return(
-                <div className = 'right' style ={{textAlign: 'right'}}>
+        // if(this.props.user){
+
+        // }
+            if(this.props.message.user.id === this.props.currentUser.id){
+                return(
+                    <div className = 'right' style ={{textAlign: 'right'}}>
+                        <h5>{this.props.message.user.username}</h5>
+                        {this.props.message.content}
+                    </div>
+                )
+            }else{
+            return( <div className = 'left' style ={{textAlign: 'left'}}>
                     <h5>{this.props.message.user.username}</h5>
                     {this.props.message.content}
-                </div>
-            )
-        }else{
-           return( <div className = 'left' style ={{textAlign: 'left'}}>
-                <h5>{this.props.message.user.username}</h5>
-                {this.props.message.content}
-            </div>)
-        }
+                </div>)
+            }
     }
     render() {
-        console.log(this.props.message)
+        
         return (
             <div>
                 {this.renderMessageDiv()}

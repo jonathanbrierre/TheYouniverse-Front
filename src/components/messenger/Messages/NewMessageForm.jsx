@@ -9,7 +9,6 @@ class NewMessageForm extends Component {
 
     onSubmit = (e) => {
         e.preventDefault()
-        console.log('hello')
         fetch(`http://localhost:3000/messages`,{
             method: 'POST',
             headers:{
@@ -23,7 +22,6 @@ class NewMessageForm extends Component {
             })
         })
             .then(resp => resp.json())
-            .then(console.log)
             this.setState({message: ''})
     }
 

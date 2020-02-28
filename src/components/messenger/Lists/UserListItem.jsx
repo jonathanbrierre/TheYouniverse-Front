@@ -9,6 +9,7 @@ class UserListItem extends Component {
         console.log(this.props)
         this.props.history.push(`/messenger/${this.props.convo.id}`)
     }
+    
     render() {
         return (
             <div className = 'listItem' onClick={this.onClick}>
