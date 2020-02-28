@@ -146,3 +146,20 @@
 .notFoundContainer h1{
     padding-top: 15vh;
 }
+
+.listDiv{
+    border-top: solid 2px black;
+    border-bottom: solid 2px black;
+    height: 50vh;
+    overflow: scroll
+}
+
+.listItem{
+    border-bottom: solid 1px black;
+    padding: 7px
+}
+
+.listItem:hover{
+    opacity: .7;
+    cursor: pointer
+}

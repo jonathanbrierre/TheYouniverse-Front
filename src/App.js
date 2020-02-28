@@ -58,7 +58,8 @@ class App extends React.Component {
           <Route exact path = '/topics' render = {routerProps => <TopicsContainer {...routerProps}/>} />
           <Route path = '/topics/:slug' render = {this.renderTopicPosts} />
           <Route  path = '/profile/:id' render = {routerProps => <UserProfileContainer {...routerProps} />} />
-          <Route path = '/messenger' render = {()=> <ConversationContainer/>} />
+          <Route exact path = '/messenger' render = {routerProps=> <ConversationContainer user = {this.props.userManager.userObj} {...routerProps}/>} />
+          <Route path = '/messenger/:id' render = {routerProps=> <ConversationContainer user = {this.props.userManager.userObj} {...routerProps}/>} />
           <Route path = '/notFound' component = {NotFound} />
           <Route component = {NotFound} />
         </Switch>
