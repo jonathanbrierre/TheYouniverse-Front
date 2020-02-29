@@ -1,21 +1,32 @@
 import React, { Component } from 'react'
-
-import { connect } from 'react-redux'
 import Message  from './Message'
 import NewMessageForm from './NewMessageForm'
+import { Button} from 'semantic-ui-react'
 import {ActionCableConsumer} from 'react-actioncable-provider'
+import {withRouter} from 'react-router-dom'
 
-export class MessagesContainer extends Component {
+class MessagesContainer extends Component {
     state = {
-        messages:[]
+        messages:[],
+        conversee: {}
     }
 
     componentDidMount(){
-        fetch(`http://localhost:3000/messages/${this.props.convoId}`)
+        fetch(`http://localhost:3000/messages/${this.props.convoId}/`)
         .then(resp => resp.json())
         .then(data => {
-            this.setState({messages:data}, () => this.scrollToBottom())
+            this.setState({messages: data}, () => this.scrollToBottom())
         })
+
+        fetch(`http://localhost:3000/messages/${this.props.convoId}/${this.props.user.id}`)
+        .then(resp => resp.json())
+        .then(data => {
+            this.setState({conversee: data})
+        })
+    }
+
+    componentDidUpdate() {
+        this.scrollToBottom();
     }
 
     componentWillUnmount(){
@@ -30,15 +41,16 @@ export class MessagesContainer extends Component {
         this.messagesEnd.scrollIntoView();
     }
 
-    componentDidUpdate() {
-        this.scrollToBottom();
+    onClickBack= () =>{
+        console.log(this.props)
+        this.props.history.push('/messenger')
     }
 
-
     render() {
+        console.log(this.state.messages)
         return (
             <div style ={{paddingTop: '15vh'}}>
-                hello
+                <h2>Conversation with {this.state.conversee.first_name} {this.state.conversee.last_name}</h2>
                 <div className='listDiv' >
                         {this.state.messages.map(message => <Message key = {message.id} message={message}/>)}
                         <div style={{ float:"left", clear: "both" }}
@@ -48,18 +60,12 @@ export class MessagesContainer extends Component {
                     <div className ='messageForm'>
                         <NewMessageForm convoId = {this.props.convoId}/>
                     </div>
+                    <Button onClick = {this.onClickBack}>Back to Conversations</Button>
                 <ActionCableConsumer channel = {{channel: 'MessengerChannel', convoId: this.props.convoId}} onReceived = {this.handleOnReceived} />
             </div>
         )
     }
 }
 
-const mapStateToProps = (state) => ({
-    
-})
 
-const mapDispatchToProps = {
-    
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(MessagesContainer)
+export default withRouter(MessagesContainer)

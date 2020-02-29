@@ -6,7 +6,7 @@ import swal from 'sweetalert'
 import {editUserInfo, logOutUser, handleUnfollow, handleFollow} from '../../actions/AuthActions'
 import {withRouter} from 'react-router-dom'
 import { FollowingCard } from './FollowingCard'
-// import state from 'sweetalert/typings/modules/state'
+
 
 class Profile extends Component {
 
@@ -106,6 +106,25 @@ class Profile extends Component {
         }
     }
 
+    onClickConvo = () => {
+        fetch(`http://localhost:3000/conversations`,{
+            method: 'POST',
+            headers:{
+                'Authorization': `bearer ${this.props.userToken}`,
+                'content-type': 'application/json',
+                accept: 'application/json'
+            },
+            body: JSON.stringify({
+                userId: this.props.currentUser.id,
+                converseeId: this.props.thisUser.id
+            })
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            this.props.history.push(`/messenger/${data.id}`)
+        })
+    }
+
     displayFollowButton =() =>{
         if(this.props.thisUser){
             if( this.props.thisUser.id !== this.props.currentUser.id){
@@ -117,6 +136,18 @@ class Profile extends Component {
             }
         }else{
             return 
+        }
+    }
+
+    displayConversationButton = () => {
+        if(this.props.thisUser){
+            if( this.props.thisUser.id !== this.props.currentUser.id){
+                return (
+                    <div>
+                        <button onClick = {this.onClickConvo}>Start Conversation</button>
+                    </div>
+                )
+            }
         }
     }
 
@@ -151,7 +182,7 @@ class Profile extends Component {
         return (
             <div>
                 <div className = 'profileDiv'>
-                    <img className = 'profilePicture' src = {`${this.props.user.avatar}`}/>
+                    <img className = 'profilePicture' src = {`${this.props.user.avatar}`} alt =''/>
                     <div className = 'profileInfoDivOne' >
                         <h2>{this.props.user.first_name}{' '}{this.props.user.last_name}</h2>
                         <br></br>
@@ -181,7 +212,7 @@ class Profile extends Component {
                             </Modal.Content>
                         </Modal>
                     </div>
-                    {this.displayFollowButton()}
+                    {this.displayFollowButton()}{this.displayConversationButton()}
                     <p>Following: </p>
                                 <div>{this.displayFollowees()}</div>
                     <p>Followers:</p>

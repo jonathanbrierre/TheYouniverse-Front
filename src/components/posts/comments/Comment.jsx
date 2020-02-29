@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Feed } from 'semantic-ui-react'
 import {connect} from 'react-redux'
-import { Button, Header, Form, Modal } from 'semantic-ui-react'
+import { Button, Form, Modal } from 'semantic-ui-react'
 import Swal from 'sweetalert2'
 
 class Comment extends Component {

@@ -41,10 +41,10 @@ const MainNav = (props) => {
                     <Icon name='list' />
                     Discussion Topics
                 </Menu.Item >
-                <Menu.Item as={Link} to='/messenger' onClick={onClickStore}>
+                {props.token.length ?<Menu.Item as={Link} to='/messenger' onClick={onClickStore}>
                     <Icon name='comments outline' />
                     Messenger
-                </Menu.Item >
+                </Menu.Item > : null }
                 {props.token.length ? <Menu.Item as={Link} to ={`/profile/${props.user.id}`} onClick={() => {onClickStore(); props.unselectUser()}}>
                     <Icon name='address card outline' />
                     Your Profile

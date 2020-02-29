@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Feed, Form, Button } from 'semantic-ui-react'
+import { Form } from 'semantic-ui-react'
 import {connect}  from 'react-redux'
 
 export class NewComment extends Component {

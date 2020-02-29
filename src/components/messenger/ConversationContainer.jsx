@@ -3,7 +3,7 @@ import MainNav from '../navigation/MainNav'
 import UserListContainer from './Lists/UserListContainer'
 
 import {connect} from 'react-redux'
-import { MessagesContainer } from './Messages/MessagesContainer';
+import  MessagesContainer  from './Messages/MessagesContainer';
 
 
 
@@ -12,7 +12,7 @@ class ConversationContainer extends Component {
     showListOrMessages = () => {
         if(this.props.user.id){
             if(this.props.match.params.id){
-                return (<MessagesContainer convoId = {this.props.match.params.id}/>)
+                return (<MessagesContainer convoId = {this.props.match.params.id} user = {this.props.user}/>)
             }else{
                 return (<UserListContainer user = {this.props.user} token = {this.props.token}/>)
             }
@@ -33,9 +33,7 @@ class ConversationContainer extends Component {
 
 const mapStateToProps = state =>{
         return{
-            token: state.userManager.token,
-            currentUser: state.userManager.userObj,
-            conversations: state.messengerManager.conversations
+            token: state.userManager.token
         }
 }
 

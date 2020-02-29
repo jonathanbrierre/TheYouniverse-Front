@@ -3,10 +3,8 @@ import MainNav from '../navigation/MainNav'
 import Profile  from './Profile'
 import { connect } from 'react-redux'
 import {selectUser} from '../../actions/AuthActions'
-import NotFound from '../../NotFound'
 import Swal from 'sweetalert2'
 
-let boolean;
 
 class UserProfileContainer extends Component {
 

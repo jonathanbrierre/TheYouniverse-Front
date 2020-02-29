@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {addConversations} from '../../../actions/MessengerActions'
 import {connect} from 'react-redux'
 import UserListItem from './UserListItem'
+
 class UserListContainer extends Component {
 
 
@@ -32,11 +33,10 @@ class UserListContainer extends Component {
     render() {
         return (
             <div style ={{paddingTop: '15vh'}}>
-                <h1>Continue a conversation with</h1>
+                <h1>Previous Conversations</h1>
                 <div className = 'listDiv'>
                     {this.renderConversations()}
                 </div>
-                <h2>Or start a new conversation here</h2>
             </div>
         )
     }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {withRouter} from 'react-router-dom'
 import { Feed } from 'semantic-ui-react'
-import { connect } from 'react-redux'
+
 
 class UserListItem extends Component {
 
@@ -25,12 +25,5 @@ class UserListItem extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-    
-})
 
-const mapDispatchToProps = {
-    
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(UserListItem))
+export default withRouter(UserListItem)

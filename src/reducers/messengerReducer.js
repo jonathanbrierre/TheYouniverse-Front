@@ -1,6 +1,5 @@
 const initialState = {
-    conversations: [],
-    messages: []
+    conversations: []
 }
 export default function messengerManager(state = initialState, action){
     switch(action.type){

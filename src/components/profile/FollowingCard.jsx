@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
+
 
 export class FollowingCard extends Component {
 
@@ -20,12 +20,5 @@ export class FollowingCard extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-    
-})
 
-const mapDispatchToProps = {
-    
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(FollowingCard)
+export default FollowingCard

@@ -10,7 +10,7 @@ const NotFound = (props) => {
     
     return (
         <div  >
-            {/* {setTopic()} */}
+            {setTopic()}
             <MainNav/>
             <div className ='notFoundContainer'>
                 <h1>Welcome to the void. There is nothing to see here</h1>

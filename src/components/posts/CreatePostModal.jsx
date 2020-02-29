@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Header, Form, Modal } from 'semantic-ui-react'
+import { Button, Form, Modal } from 'semantic-ui-react'
 import {connect} from 'react-redux'
 import {createPost} from '../../actions/TopicsActions'
 import Swal from 'sweetalert2'
@@ -71,7 +71,6 @@ class CreatePostModal extends Component {
 const mapStateToProps = state => {
     return {
         selectedTopic: state.topicsManager.selectedTopic,
-        currentUser: state.userManager.userObj,
         token: state.userManager.token
     }
 }
