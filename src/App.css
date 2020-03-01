@@ -172,3 +172,33 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+.topicDiv{
+    height: 20vh;
+    margin: 15px;
+    background-repeat: no-repeat;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    background-size: cover;
+    opacity: 1;
+    
+    transition: 0.3s;
+}
+
+
+
+.topicDiv:hover{
+    opacity: 0.5;
+    transition: 0.3s;
+    color:black
+}
+
+.topicText {
+    float: right;
+    position: relative;
+    top: 10vh;
+    font-size: 3em;
+    opacity: 1;
+    color:white;
+}

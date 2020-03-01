@@ -192,7 +192,7 @@ class Profile extends Component {
                         <h4 className ='email'>Email:</h4> <p>{this.props.user.email}</p>
                     </div>
                     <div className = 'bioDiv'>
-                        <h4 className = 'bio'>Your Bio:</h4> <p>{this.props.user.bio}</p>
+                        <h4 className = 'bio'>About:</h4> <p>{this.props.user.bio}</p>
                     </div>
                     <div className = 'buttonDiv'>
                     {this.props.token ? <><Button style ={{textAlign: 'left'}} onClick = {() => {this.toggleModal(); this.fillEditForm()}}>Edit Profile</Button>
