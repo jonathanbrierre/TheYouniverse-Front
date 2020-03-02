@@ -1,17 +1,15 @@
 import React, { Component } from 'react'
+import {Link} from 'react-router-dom'
+import {unselectUser} from '../../actions/AuthActions'
+import {connect} from 'react-redux'
 
-
-export class FollowingCard extends Component {
+class FollowingCard extends Component {
 
     displayFollowings = () =>{
-        if(this.props.followee){
-            return (<h5>{this.props.followee.username}</h5>)
-        }else if(this.props.follower){
-            return (<h5>{this.props.follower.username}</h5>)
-        }
+            return (<Link onClick = {this.props.unselectUser}to ={`/profile/${this.props.following.id}`} ><h5>{this.props.following.username}</h5></Link>) 
     }
     render() {
-        console.log(this.props)
+        console.log(this.props.following)
         return (
             <div> 
                 {this.displayFollowings()}
@@ -21,4 +19,4 @@ export class FollowingCard extends Component {
 }
 
 
-export default FollowingCard
+export default connect(null, {unselectUser})(FollowingCard)

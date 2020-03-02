@@ -6,7 +6,7 @@ import swal from 'sweetalert'
 import {editUserInfo, logOutUser, handleUnfollow, handleFollow} from '../../actions/AuthActions'
 import {withRouter} from 'react-router-dom'
 import { FollowingCard } from './FollowingCard'
-
+import FollowingCont from './FollowingCont'
 
 class Profile extends Component {
 
@@ -17,7 +17,8 @@ class Profile extends Component {
         first_name: '',
         last_name: '',
         bio: '',
-        followee: false
+        followee: false,
+        displayFollowings: ''
     }
 
 
@@ -91,7 +92,7 @@ class Profile extends Component {
 
     displayFollowees = () => {
         if(this.props.user.id){
-            return (this.props.user.followees.map( followee =>  <FollowingCard  key = {followee.id}followee ={followee}/> ))
+            return (<FollowingCont followings = {this.props.user.followees} name = 'Following:'/>)
         }else{
             return 
         }
@@ -99,10 +100,27 @@ class Profile extends Component {
 
     displayFollowers = () => {
         if(this.props.user.id){
-            // console.log(this.props.user)
-            return (this.props.user.followers.map( follower =>  <FollowingCard  key = {follower.id} follower ={follower}/> ))
+            return (<FollowingCont followings = {this.props.user.followers} name = 'Followers:'/>)
         }else{
             return 
+        }
+    }
+
+    displayFollowingsContainer = (e) => {
+        if(e.target.innerHTML === 'Following'){
+            this.setState({displayFollowings: 'Following'})
+        }else if(e.target.innerHTML === 'Followers'){
+            this.setState({displayFollowings: 'Followers'})
+        }else{
+            this.setState({displayFollowings: ''})
+        }
+    }
+
+    renderFollowings = () => {
+        if(this.state.displayFollowings === 'Following'){
+            return this.displayFollowees()
+        }else if (this.state.displayFollowings === 'Followers'){
+            return this.displayFollowers()
         }
     }
 
@@ -130,7 +148,7 @@ class Profile extends Component {
             if( this.props.thisUser.id !== this.props.currentUser.id){
                 return (
                     <div>
-                        <button onClick = {this.onClickFollowing}>{this.props.followee ? 'Unfollow':'Follow'}</button>
+                        <Button style ={{backgroundColor: 'white', color: 'black', border: 'solid 1px grey'}} onClick = {this.onClickFollowing}>{this.props.followee ? 'Unfollow':'Follow'}</Button>
                     </div>
                 )
             }
@@ -144,7 +162,7 @@ class Profile extends Component {
             if( this.props.thisUser.id !== this.props.currentUser.id){
                 return (
                     <div>
-                        <button onClick = {this.onClickConvo}>Start Conversation</button>
+                        <Button style ={{backgroundColor: 'blue', color: 'white'}}onClick = {this.onClickConvo}>Start Conversation</Button>
                     </div>
                 )
             }
@@ -212,11 +230,12 @@ class Profile extends Component {
                             </Modal.Content>
                         </Modal>
                     </div>
-                    {this.displayFollowButton()}{this.displayConversationButton()}
-                    <p>Following: </p>
-                                <div>{this.displayFollowees()}</div>
-                    <p>Followers:</p>
-                    <div>{this.displayFollowers()}</div>
+                    {this.displayFollowButton()}
+                    <br></br>
+                    {this.displayConversationButton()}
+                    <br></br>
+                    <p> <span className = 'followingOptions'onClick = {this.displayFollowingsContainer}>Following</span> | <span className = 'followingOptions' onClick = {this.displayFollowingsContainer} >X</span> | <span className = 'followingOptions' onClick = {this.displayFollowingsContainer} >Followers</span> </p>
+                    <div>{this.renderFollowings()}</div>
                 </div>
             </div>
         )
@@ -247,7 +266,6 @@ const mapStateToProps =(state, ownProps) => {
             }
         }
     }
-
 }
 
 

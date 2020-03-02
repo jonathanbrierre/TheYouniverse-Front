@@ -224,3 +224,11 @@
     color: white;
     font-size: 3vh
 } */
+
+.followingOptions{
+    color: blue;
+}
+
+.followingOptions:hover{
+    cursor:pointer;
+}
