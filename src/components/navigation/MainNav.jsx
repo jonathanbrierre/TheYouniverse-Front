@@ -3,8 +3,9 @@ import { Icon, Menu, Sidebar, Button } from 'semantic-ui-react'
 import {connect} from 'react-redux'
 import {showNav, storeNav} from '../../actions/NavActions'
 import {logOutUser, unselectUser} from '../../actions/AuthActions'
-
+import CreatePostModal from '../posts/CreatePostModal'
 import {withRouter, Link} from 'react-router-dom'
+// import logo from '/planetIcon.png'
 
 const MainNav = (props) => {
     const onClickShow = () => {
@@ -55,6 +56,7 @@ const MainNav = (props) => {
                 </Menu.Item>
             </Sidebar>
             <Button onClick = {onClickShow} icon = 'bars' size = 'massive' style= {{backgroundColor: '#1b1c1d', color: 'white'}}></Button>
+            <span className = 'appName'>The Youniverse</span>
         </div>
     )
 }
@@ -63,7 +65,8 @@ const mapStateToProps = state => {
     return {
         display: state.navManager,
         token: state.userManager.token,
-        user: state.userManager.userObj
+        user: state.userManager.userObj,
+        showCreate: state.topicsManager.onTopicPage
     }
 }
 

@@ -11,6 +11,7 @@ class UserListItem extends Component {
     }
     
     render() {
+        console.log(this.props)
         return (
             <div className = 'listItem' onClick={this.onClick}>
                 <Feed>

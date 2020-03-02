@@ -18,6 +18,14 @@ export const removePosts = () => {
     return { type: 'UNMOUNT'}
 }
 
+export const createPostButton = () => {
+    return {type: 'CREATE_BUTTON'}
+}
+
+export const removePostButton =() => {
+    return {type: 'REMOVE_BUTTON'}
+}
+
 //Individual Posts 
 export const createPost = newPostObj => {
     return {type: 'NEW_POST', payload: newPostObj}

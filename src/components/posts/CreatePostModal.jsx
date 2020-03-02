@@ -53,7 +53,7 @@ class CreatePostModal extends Component {
     render() {
         return (
             <div className='modal'>
-                <Modal open ={this.state.modalOpen} trigger={<Button onClick ={this.onClickModalOpen} >Create Post</Button>} >
+                <Modal open ={this.state.modalOpen} trigger={<Button onClick ={this.onClickModalOpen} className = 'createPostButton' style = {{backgroundColor: '#1b1c1d', color: 'white', fontSize: '2.5vw', float: 'right', position:'fixed', left: '80vw'}} >Create Post</Button>} >
                     <Modal.Header>Create a Post</Modal.Header>
                     <Modal.Content >                
                         <Form onSubmit = {this.onSubmit}>

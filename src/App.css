@@ -1,3 +1,10 @@
+.appName {
+    color: white;
+    margin-top: 20px;
+    margin-right: 20px;
+    float: right;
+    font-size: 3vh
+}
 .postDiv {
     border: solid 1px grey;
     border-radius:  0px  0% 3% 3%;
@@ -48,10 +55,11 @@
     padding-right: 3px
 }
 
-.modal{
-    text-align: right;
-    margin-right: 5%;
-}
+/* .modal{
+    background-color: #1b1c1d;
+    color: white;
+    font-size: 3vh
+} */
 
 .commentConfig:hover{
     color: blue;
@@ -202,3 +210,17 @@
     opacity: 1;
     color:white;
 }
+
+.topicFooter{
+    display: block;
+    position: fixed;
+    width: 100%;
+    padding:200px;
+    height: 5vh
+}
+
+/* .createPostButton{
+    background-color: #1b1c1d;
+    color: white;
+    font-size: 3vh
+} */

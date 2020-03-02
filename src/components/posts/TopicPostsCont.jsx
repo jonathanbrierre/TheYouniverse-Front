@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import MainNav from '../navigation/MainNav'
 import {connect} from 'react-redux'
-import {getPostsForTopic, setHeading, setTopic, removePosts} from '../../actions/TopicsActions'
+import {getPostsForTopic, setHeading, setTopic, removePosts, createPostButton, removePostButton} from '../../actions/TopicsActions'
 import Post from './Post'
 import CreatePostModal from './CreatePostModal'
 import BottomScrollListener from 'react-bottom-scroll-listener';
@@ -17,10 +17,12 @@ class TopicPostsCont extends Component {
         let slug = this.props.match.params.slug
         this.setHeading(slug)
         this.fetchTopicPosts(slug)
+        this.props.createPostButton()
     }
 
     componentWillUnmount(){
         this.props.removePosts()
+        this.props.removePostButton()
     }
 
     fetchTopicPosts = () => {
@@ -65,11 +67,13 @@ class TopicPostsCont extends Component {
                 <div style = {{ position: 'relative', top: '10vh'}}>
                     <h1 style = {{textAlign: 'right', marginRight: '5%'}}>{this.props.heading}</h1>
                     <CreatePostModal/>
+                    
                     {this.renderPosts()}
                     {this.state.loading ? <h3>Loading...</h3>:null}
                     {this.state.endOfPosts ? <h3>No More Posts</h3>:null}
                 </div>
             </div>
+           
         </BottomScrollListener>
         )
     }
@@ -82,4 +86,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {getPostsForTopic, setHeading, setTopic, removePosts})(TopicPostsCont)
+export default connect(mapStateToProps, {getPostsForTopic, setHeading, setTopic, removePosts, createPostButton, removePostButton})(TopicPostsCont)

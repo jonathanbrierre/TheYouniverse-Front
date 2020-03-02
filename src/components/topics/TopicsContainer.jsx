@@ -10,8 +10,8 @@ class TopicsContainer extends Component {
         return (
             <div>
                 <MainNav/>
-                <div style = {{ position: 'relative', top: '10vh'}}>
-                    <h2>Choose a Discussion Topic</h2>
+                <div style = {{ position: 'relative', top: '10vh', textAlign: 'right '}}>
+                    <h1 style = {{paddingRight: '20px'}} >Choose a Discussion Topic</h1>
                     {this.props.topics.map(topic => <Topic key ={topic.id} topic = {topic}/>)}
 
                 </div>

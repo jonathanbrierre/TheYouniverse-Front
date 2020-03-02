@@ -2,7 +2,8 @@ export default function topicsManager(state={
     topics: [],
     selectedTopic: {},
     topicPosts: [],
-    heading: ''
+    heading: '',
+    onTopicPage: false
 },action){
     
     switch(action.type){
@@ -18,8 +19,13 @@ export default function topicsManager(state={
         case 'SET_HEADING':
             return {...state, heading: action.payload}
         case 'NEW_POST':
-
             return {...state, topicPosts: [action.payload, ...state.topicPosts]}
+
+        case 'CREATE_BUTTON':
+            return {...state, onTopicPage: true}
+
+        case 'REMOVE_BUTTON':
+            return {...state, onTopicPage: false}
 
         case 'UPDATE_POST':
             let updatedPosts = state.topicPosts.map(post => ( action.payload.id === post.id ? {...post, content: action.payload.content} : post))

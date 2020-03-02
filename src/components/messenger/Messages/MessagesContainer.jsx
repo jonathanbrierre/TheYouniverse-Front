@@ -34,6 +34,8 @@ class MessagesContainer extends Component {
     }
 
     handleOnReceived = (something) => {
+        console.log(something, "HELO", this.state)
+        
         this.setState({messages: [...this.state.messages, something]})
     }
 
@@ -42,7 +44,6 @@ class MessagesContainer extends Component {
     }
 
     onClickBack= () =>{
-        console.log(this.props)
         this.props.history.push('/messenger')
     }
 
