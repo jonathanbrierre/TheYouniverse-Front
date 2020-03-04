@@ -28,12 +28,13 @@ class NewMessageForm extends Component {
     handleOnChange = (e) => {
         this.setState({[e.target.name]: e.target.value})
     }
+    
     render() {
         return (
             <div style = {{textAlign: 'right'}}>
                 <Form onSubmit = {this.onSubmit}>
                     <Form.Input  type='text' name = 'message' placeholder = 'Send Message' value = {this.state.message} onChange ={this.handleOnChange}/>
-                    <Button type = 'submit'> Submit</Button>
+                    <Button style = {{backgroundColor: 'blue', color: 'white'}} type = 'submit'> Submit</Button>
                 </Form>
             </div>
         )

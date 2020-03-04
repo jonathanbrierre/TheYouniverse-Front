@@ -248,7 +248,6 @@ const mapStateToProps =(state, ownProps) => {
         let followee = state.userManager.userObj.followees.some(followee => followee.id === ownProps.user.id)
         let followeeObj = state.userManager.userObj.followees.find(followee => followee.id === ownProps.user.id)
         if(followee){
-            console.log('hello')
             return {
                 currentUser: state.userManager.userObj,
                 thisUser: ownProps.user,
@@ -257,7 +256,6 @@ const mapStateToProps =(state, ownProps) => {
                 followeeObj
             }
         }else{
-            console.log('goodbye')
             return {
                 currentUser: state.userManager.userObj,
                 thisUser: ownProps.user,

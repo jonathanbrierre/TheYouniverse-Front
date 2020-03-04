@@ -22,7 +22,7 @@ class TopicPostsCont extends Component {
 
     componentWillUnmount(){
         this.props.removePosts()
-        this.props.removePostButton()
+       
     }
 
     fetchTopicPosts = () => {

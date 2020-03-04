@@ -3,6 +3,8 @@ import Message  from './Message'
 import NewMessageForm from './NewMessageForm'
 import { Button} from 'semantic-ui-react'
 import {ActionCableConsumer} from 'react-actioncable-provider'
+import {connect} from 'react-redux'
+
 import {withRouter} from 'react-router-dom'
 
 class MessagesContainer extends Component {
@@ -12,9 +14,11 @@ class MessagesContainer extends Component {
     }
 
     componentDidMount(){
+
         fetch(`http://localhost:3000/messages/${this.props.convoId}/`)
         .then(resp => resp.json())
         .then(data => {
+            console.log(data)
             this.setState({messages: data}, () => this.scrollToBottom())
         })
 
@@ -35,8 +39,8 @@ class MessagesContainer extends Component {
 
     handleOnReceived = (something) => {
         console.log(something, "HELO", this.state)
-        
         this.setState({messages: [...this.state.messages, something]})
+        // this.props.updateNotif(this.props.convoId)
     }
 
     scrollToBottom = () => {
@@ -61,7 +65,8 @@ class MessagesContainer extends Component {
                     <div className ='messageForm'>
                         <NewMessageForm convoId = {this.props.convoId}/>
                     </div>
-                    <Button onClick = {this.onClickBack}>Back to Conversations</Button>
+                    <br></br>
+                    <div style = {{textAlign: 'center'}}><Button onClick = {this.onClickBack}>Back to Conversations</Button></div>
                 <ActionCableConsumer channel = {{channel: 'MessengerChannel', convoId: this.props.convoId}} onReceived = {this.handleOnReceived} />
             </div>
         )
@@ -69,4 +74,4 @@ class MessagesContainer extends Component {
 }
 
 
-export default withRouter(MessagesContainer)
+export default connect(null)(withRouter(MessagesContainer))
