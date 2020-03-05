@@ -1,13 +1,17 @@
 import React, { Component } from 'react'
 import MainNav from '../navigation/MainNav'
 import UserListContainer from './Lists/UserListContainer'
-
+import {clearConvos} from '../../actions/MessengerActions'
 import {connect} from 'react-redux'
 import  MessagesContainer  from './Messages/MessagesContainer';
 
 
 
 class ConversationContainer extends Component {
+
+    componentWillUnmount(){
+        this.props.clearConvos()
+    }
 
     showListOrMessages = () => {
         if(this.props.user.id){
@@ -37,4 +41,4 @@ const mapStateToProps = state =>{
         }
 }
 
-export default connect(mapStateToProps)(ConversationContainer)
+export default connect(mapStateToProps, {clearConvos})(ConversationContainer)

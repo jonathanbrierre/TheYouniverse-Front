@@ -18,6 +18,10 @@ export default function messengerManager(state = initialState, action){
                 return convo
             })
             return {...state, conversations: updatedConvos}
+
+        case 'CLEAR_CONVOS':
+            return {...state, conversations: []}
+            
         default:
             return state
     }
