@@ -1,3 +1,10 @@
+### Hello!
+Thank you for taking the time to check out this repo. This is The Youniverse - a mock social media application designed for the promotion of emotionally intelligent though. 
+
+Here is a link to a demonstration video - https://www.youtube.com/watch?v=93rDLcB3dKI&t=4s
+
+If you are looking to fork and clone this onto your own computer, feel free to read onwards. 
+
 ### Setting Up 
 
 1. Fork and clone this repository to your computer
