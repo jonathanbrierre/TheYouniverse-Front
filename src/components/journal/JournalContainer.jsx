@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Header } from 'semantic-ui-react'
+import {Header} from './Header'
 import MainNav from '../navigation/MainNav'
+import NewEntryModal from './NewEntryModal'
 
 class JournalContainer extends Component {
     render() {
@@ -16,6 +17,7 @@ class JournalContainer extends Component {
                 <Header/>
                 <Header/>
                 <Header/>
+                <NewEntryModal/>
             </div>
         )
     }
