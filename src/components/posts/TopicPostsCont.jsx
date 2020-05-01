@@ -16,27 +16,25 @@ class TopicPostsCont extends Component {
     componentDidMount(){
         let slug = this.props.match.params.slug
         this.setHeading(slug)
-        this.fetchTopicPosts(slug)
+        this.fetchTopicPosts()
         this.props.createPostButton()
     }
 
     componentWillUnmount(){
         this.props.removePosts()
-       
     }
 
     fetchTopicPosts = () => {
         let slug = this.props.match.params.slug
         fetch(`http://localhost:3000/posts/${slug}/${this.state.pageCounter}`)
         .then(resp => resp.json())
-        .then(allPosts => {
-            if(allPosts){
+        .then(posts => {
+            if(posts){
                 this.setState({loading: false})
-                this.props.getPostsForTopic(allPosts)
+                this.props.getPostsForTopic(posts)
                 this.props.setTopic(this.props.chosenTopic)
             } else{
                 this.setState({loading: false, endOfPosts: true})
-                console.log('end of posts')
             }
         })
     }
@@ -73,7 +71,6 @@ class TopicPostsCont extends Component {
                     {this.state.endOfPosts ? <h3>No More Posts</h3>:null}
                 </div>
             </div>
-           
         </BottomScrollListener>
         )
     }

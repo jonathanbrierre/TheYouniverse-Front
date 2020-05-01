@@ -9,11 +9,12 @@ import {connect} from 'react-redux'
 
 import {withRouter} from 'react-router-dom'
 import {Route, Switch} from 'react-router-dom'
+
 import TopicPostsCont from './components/posts/TopicPostsCont';
 import NotFound from './NotFound';
 import UserProfileContainer from './components/profile/UserProfileContainer';
 import ConversationContainer from './components/messenger/ConversationContainer';
-
+import JournalContainer from './components/journal/JournalContainer'
 
 class App extends React.Component {
 
@@ -55,6 +56,7 @@ class App extends React.Component {
     <div className="App">
         <Switch>
           <Route exact path='/' render = { routerProps => <Home {...routerProps}/>}/>
+          <Route exact path='/journal' render = { routerProps => <JournalContainer {...routerProps}/>}/>
           <Route exact path = '/topics' render = {routerProps => <TopicsContainer {...routerProps}/>} />
           <Route path = '/topics/:slug' render = {this.renderTopicPosts} />
           <Route  path = '/profile/:id' render = {routerProps => <UserProfileContainer {...routerProps} />} />

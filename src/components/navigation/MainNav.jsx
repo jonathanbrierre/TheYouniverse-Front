@@ -46,6 +46,10 @@ const MainNav = (props) => {
                     <Icon name='comments outline' />
                     Messenger
                 </Menu.Item > : null }
+                {props.token.length ?<Menu.Item as={Link} to='/journal' onClick={onClickStore}>
+                    <Icon name='book' />
+                    Journal
+                </Menu.Item > : null }
                 {props.token.length ? <Menu.Item as={Link} to ={`/profile/${props.user.id}`} onClick={() => {onClickStore(); props.unselectUser()}}>
                     <Icon name='address card outline' />
                     Your Profile
