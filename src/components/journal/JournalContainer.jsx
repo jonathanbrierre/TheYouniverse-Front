@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import {Header} from './Header'
 import MainNav from '../navigation/MainNav'
 import NewEntryModal from './NewEntryModal'
+import {userEntries} from '../../actions/JournalActions'
+import EntriesContainer from './EntriesContainer'
 
 class JournalContainer extends Component {
 
@@ -11,7 +13,9 @@ class JournalContainer extends Component {
             let token = localStorage.getItem('token')
             fetch(`http://localhost:3000/user_entries`, {headers: {'Authorization': `bearer  ${token}`}})
                 .then(resp => resp.json())
-                .then(console.log)
+                .then(data => {
+                    this.props.userEntries(data.entries)
+                })
         }
     }
 
@@ -29,6 +33,7 @@ class JournalContainer extends Component {
                 <Header/>
                 <Header/>
                 <NewEntryModal/>
+                <EntriesContainer/>
             </div>
         )
     }
@@ -40,4 +45,4 @@ const mapStateToProps = (state) => {
 
 
 
-export default connect(mapStateToProps)(JournalContainer)
+export default connect(mapStateToProps, {userEntries})(JournalContainer)

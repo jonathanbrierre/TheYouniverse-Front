@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Button, Form, Modal } from 'semantic-ui-react'
 import {connect} from 'react-redux'
+import {newEntry} from '../../actions/JournalActions'
+import Swal from 'sweetalert2'
 
 class NewEntryModal extends Component {
 
@@ -19,7 +21,7 @@ class NewEntryModal extends Component {
     }
 
     onEntrySubmit = (e) => {
-        fetch('ttp://localhost:3000/entries', {
+        fetch('http://localhost:3000/entries', {
             method: 'POST',
             headers: {
                 'Authorization': `bearer ${this.props.token}`,
@@ -30,7 +32,13 @@ class NewEntryModal extends Component {
             })
         })
         .then(resp => resp.json())
-        .then(console.log)
+        .then(data => {
+            if(data.entry){
+                Swal.fire({icon: 'success', text: data.message})
+                this.setState({open: false})
+                this.props.newEntry(data.entry)
+            }
+        })
     }
 
     render() {
@@ -58,4 +66,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(NewEntryModal)
+export default connect(mapStateToProps, {newEntry})(NewEntryModal)
