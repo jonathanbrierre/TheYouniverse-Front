@@ -9,7 +9,7 @@ export default function journalManager(state = initialState, action){
             return {...state, entries: action.payload}
 
         case 'NEW_ENTRY':
-            return {...state, entries: [...state.entries, action.payload]}
+            return {...state, entries: [ action.payload, ...state.entries]}
         default:
             return state
     }

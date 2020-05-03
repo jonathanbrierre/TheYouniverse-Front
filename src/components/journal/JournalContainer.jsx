@@ -6,6 +6,7 @@ import NewEntryModal from './NewEntryModal'
 import {userEntries} from '../../actions/JournalActions'
 import EntriesContainer from './EntriesContainer'
 
+
 class JournalContainer extends Component {
 
     componentDidMount(){
@@ -33,6 +34,7 @@ class JournalContainer extends Component {
                 <Header/>
                 <Header/>
                 <NewEntryModal/>
+                
                 <EntriesContainer/>
             </div>
         )

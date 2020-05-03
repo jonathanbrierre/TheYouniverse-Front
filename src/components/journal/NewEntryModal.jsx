@@ -31,12 +31,14 @@ class NewEntryModal extends Component {
                 entry: this.state.entry
             })
         })
-        .then(resp => resp.json())
+        .then(resp => resp.json()) // Come back and throw an error
         .then(data => {
             if(data.entry){
                 Swal.fire({icon: 'success', text: data.message})
-                this.setState({open: false})
+                this.setState({open: false, entry: ''})
                 this.props.newEntry(data.entry)
+            }else{
+                Swal.fire({icon: 'error', text: data.message})
             }
         })
     }
