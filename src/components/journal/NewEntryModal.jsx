@@ -8,7 +8,8 @@ class NewEntryModal extends Component {
 
     state = {
         open: false,
-        entry: ''
+        entry: '',
+        lengthLimit: 3000
     }
 
     toggleModal = () => {
@@ -18,29 +19,34 @@ class NewEntryModal extends Component {
 
     onChangeEntry = (e) => {
         this.setState({[e.target.name]:e.target.value})
+        // return this.state.lengthLimit - e.target.value.length
     }
 
     onEntrySubmit = (e) => {
-        fetch('http://localhost:3000/entries', {
-            method: 'POST',
-            headers: {
-                'Authorization': `bearer ${this.props.token}`,
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify({
-                entry: this.state.entry
+        if(this.state.lengthLimit - this.state.entry.lenght > 0){
+            fetch('http://localhost:3000/entries', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `bearer ${this.props.token}`,
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    entry: this.state.entry
+                })
             })
-        })
-        .then(resp => resp.json()) // Come back and throw an error
-        .then(data => {
-            if(data.entry){
-                Swal.fire({icon: 'success', text: data.message})
-                this.setState({open: false, entry: ''})
-                this.props.newEntry(data.entry)
-            }else{
-                Swal.fire({icon: 'error', text: data.message})
-            }
-        })
+            .then(resp => resp.json()) // Come back and throw an error
+            .then(data => {
+                if(data.entry){
+                    Swal.fire({icon: 'success', text: data.message})
+                    this.setState({open: false, entry: ''})
+                    this.props.newEntry(data.entry)
+                }else{
+                    Swal.fire({icon: 'error', text: data.message})
+                }
+            })
+        }else {
+            Swal.fire({icon: 'error', text: 'Character Limit Exceeded'})
+        }
     }
 
     render() {
@@ -55,6 +61,7 @@ class NewEntryModal extends Component {
                             <Form.Button type = 'submit' >Submit</Form.Button>
                             <Button style={{backgroundColor: 'red', float:'right', marginBottom: '10px'}} onClick = {this.toggleModal}>Close</Button>
                         </Form>
+                        Character Limit: {this.state.lengthLimit - this.state.entry.length}
                     </Modal.Content>
                 </Modal>
             </div>

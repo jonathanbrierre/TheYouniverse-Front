@@ -34,7 +34,6 @@ class JournalContainer extends Component {
                 <Header/>
                 <Header/>
                 <NewEntryModal/>
-                
                 <EntriesContainer/>
             </div>
         )
