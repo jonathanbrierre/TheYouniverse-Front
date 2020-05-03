@@ -23,7 +23,12 @@ class NewEntryModal extends Component {
     }
 
     onEntrySubmit = (e) => {
-        if(this.state.lengthLimit - this.state.entry.lenght > 0){
+        e.preventDefault()
+        if(this.state.entry === ''){
+            Swal.fire({icon: 'error', text: 'Entry cannot be blank.'})
+            return
+        }
+        if(this.state.lengthLimit - this.state.entry.length >= 0){
             fetch('http://localhost:3000/entries', {
                 method: 'POST',
                 headers: {
@@ -58,7 +63,7 @@ class NewEntryModal extends Component {
                     <Modal.Content >
                         <Form onSubmit = {this.onEntrySubmit}>
                             <Form.TextArea label = 'Entry' name = 'entry' value = {this.state.entry} onChange={this.onChangeEntry}/>
-                            <Form.Button type = 'submit' >Submit</Form.Button>
+                            <Form.Button disabled ={this.state.entry.length? false:true} type = 'submit' >Submit</Form.Button>
                             <Button style={{backgroundColor: 'red', float:'right', marginBottom: '10px'}} onClick = {this.toggleModal}>Close</Button>
                         </Form>
                         Character Limit: {this.state.lengthLimit - this.state.entry.length}

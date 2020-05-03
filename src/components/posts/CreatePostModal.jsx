@@ -10,7 +10,8 @@ class CreatePostModal extends Component {
         content: '',
         alert: '',
         alertStyle: {},
-        modalOpen: false
+        modalOpen: false,
+        lengthLimit: 400
     }
 
     onChange = (e) => {
@@ -19,28 +20,32 @@ class CreatePostModal extends Component {
 
     onSubmit = (e) => {
         e.preventDefault()
-        fetch('http://localhost:3000/posts',{
-            method: "POST",
-            headers:{
-                'Authorization': `bearer ${this.props.token}`,
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify({
-                content: this.state.content,
-                topic_id: this.props.selectedTopic.id
+        if(this.state.lengthLimit - this.state.content.length >= 0){
+            fetch('http://localhost:3000/posts',{
+                method: "POST",
+                headers:{
+                    'Authorization': `bearer ${this.props.token}`,
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    content: this.state.content,
+                    topic_id: this.props.selectedTopic.id
+                })
             })
-        })
-            .then(resp => resp.json())
-            .then(postObj => {
-                if(postObj.id){
-                    this.props.createPost(postObj)
-                    this.closeModal()
-                    Swal.fire({icon: 'success', text:'Successfully Created a Post'})
-                    this.setState({content:''})
-                } else {
-                    Swal.fire({icon: 'Error', text:'Something went wrong. Check to see if you are logged in, or try again later.'})
-                }
-            })
+                .then(resp => resp.json())
+                .then(postObj => {
+                    if(postObj.id){
+                        this.props.createPost(postObj)
+                        this.closeModal()
+                        Swal.fire({icon: 'success', text:'Successfully Created a Post'})
+                        this.setState({content:''})
+                    } else {
+                        Swal.fire({icon: 'Error', text:'Something went wrong. Check to see if you are logged in, or try again later.'})
+                    }
+                })
+        }else{
+            Swal.fire({icon: 'error', text: 'Character Limit Exceeded'})
+        }
     }
 
     onClickModalOpen = () => {
@@ -62,6 +67,7 @@ class CreatePostModal extends Component {
                             <Button style={{backgroundColor: 'red', float:'right', marginBottom: '10px'}} onClick = {this.closeModal}>Close</Button>
                         </Form>
                     </Modal.Content>
+                    <span style ={{paddingLeft: '2%'}}>Character Limit: {this.state.lengthLimit - this.state.content.length}</span>
                 </Modal>
             </div>
         )
