@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {deleteEntry} from '../../actions/JournalActions'
 import Swal from 'sweetalert2'
 import swal from 'sweetalert'
+import EditEntryModal  from './EditEntryModal'
 
 class Entry extends React.Component {
 
@@ -63,14 +64,12 @@ class Entry extends React.Component {
                         </Card.Description>
                     </Card.Content>
                     <Card.Content extra>
-                        <div className='ui two buttons'>
-                        <Button basic color='green'>
-                            Edit
-                        </Button>
+                        {/* <div className='ui two buttons'> */}
+                        <EditEntryModal entry = {this.props.entry}/>
                         <Button basic color='red' onClick = {this.deleteEntry}>
                             Delete
                         </Button>
-                        </div>
+                        {/* </div> */}
                     </Card.Content>
                 </Card>
             </div>

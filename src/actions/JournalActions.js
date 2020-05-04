@@ -18,3 +18,13 @@ export const deleteEntry = (id) => {
         payload: id
     }
 }
+
+export const updateEntry = (id, entry)=>{
+    return {
+        type: 'UPDATE_ENTRY',
+        payload: {
+            id,
+            entry
+        }
+    }
+}

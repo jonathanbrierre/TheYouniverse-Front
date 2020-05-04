@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
 import { Button, Form, Modal } from 'semantic-ui-react'
-import {connect} from 'react-redux'
-import {newEntry} from '../../actions/JournalActions'
+import { connect } from 'react-redux'
 import Swal from 'sweetalert2'
-
-class NewEntryModal extends Component {
-
+import {updateEntry} from '../../actions/JournalActions'
+class EditEntryModal extends Component {
     state = {
         open: false,
         entry: '',
         lengthLimit: 3000
     }
 
+    componentDidMount(){
+        this.setState({entry: this.props.entry.text})
+    }
     toggleModal = () => {
         let value = !this.state.open
         this.setState({open: value})
@@ -19,7 +20,6 @@ class NewEntryModal extends Component {
 
     onChangeEntry = (e) => {
         this.setState({[e.target.name]:e.target.value})
-        // return this.state.lengthLimit - e.target.value.length
     }
 
     onEntrySubmit = (e) => {
@@ -29,11 +29,12 @@ class NewEntryModal extends Component {
             return
         }
         if(this.state.lengthLimit - this.state.entry.length >= 0){
-            fetch('http://localhost:3000/entries', {
-                method: 'POST',
+            fetch(`http://localhost:3000/entries/${this.props.entry.id}`, {
+                method: 'PATCH',
                 headers: {
                     'Authorization': `bearer ${this.props.token}`,
-                    'content-type': 'application/json'
+                    'content-type': 'application/json',
+                    'accept': 'application/json'
                 },
                 body: JSON.stringify({
                     text: this.state.entry
@@ -44,7 +45,7 @@ class NewEntryModal extends Component {
                 if(data.entry){
                     Swal.fire({icon: 'success', text: data.message})
                     this.setState({open: false, entry: ''})
-                    this.props.newEntry(data.entry)
+                    this.props.updateEntry(data.entry.id, data.entry)
                 }else{
                     Swal.fire({icon: 'error', text: data.message})
                 }
@@ -57,9 +58,9 @@ class NewEntryModal extends Component {
     render() {
         return (
             <div>
-                <Button onClick = {this.toggleModal}>New Entry</Button>
+                <Button onClick = {this.toggleModal} basic color='green'>Edit</Button>
                 <Modal open ={this.state.open} >
-                    <Modal.Header>What's on your mind?</Modal.Header>
+                    <Modal.Header>Edit This Entry</Modal.Header>
                     <Modal.Content >
                         <Form onSubmit = {this.onEntrySubmit}>
                             <Form.TextArea label = 'Entry' name = 'entry' value = {this.state.entry} onChange={this.onChangeEntry}/>
@@ -80,4 +81,8 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {newEntry})(NewEntryModal)
+const mapDispatchToProps = {
+    
+}
+
+export default connect(mapStateToProps, {updateEntry})(EditEntryModal)
