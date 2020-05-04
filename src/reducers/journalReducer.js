@@ -10,7 +10,13 @@ export default function journalManager(state = initialState, action){
 
         case 'NEW_ENTRY':
             return {...state, entries: [ action.payload, ...state.entries]}
+
+        case 'DELETE_ENTRY':
+            let newEntries = state.entries.filter(entry => entry.id !== action.payload)
+            return {...state, entries: newEntries}
+
         default:
             return state
+
     }
 }

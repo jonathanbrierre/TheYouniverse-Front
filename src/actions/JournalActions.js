@@ -11,3 +11,10 @@ export const newEntry = (entry) => {
         payload: entry
     }
 }
+
+export const deleteEntry = (id) => {
+    return {
+        type: 'DELETE_ENTRY',
+        payload: id
+    }
+}
