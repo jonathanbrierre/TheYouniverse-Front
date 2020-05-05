@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-
+import { Button, Form, Modal } from 'semantic-ui-react'
 class EntrySearch extends Component {
 
     render() {
         return (
             <div>
-                <form>
-                    <input type='text' name = 'searchTerm' value={this.props.searchTerm} onChange={this.props.searchTermChange}/>
-                </form>
+                <Form>
+                    <Form.Input type='text' name = 'searchTerm' value={this.props.searchTerm} onChange={this.props.searchTermChange} placeholder='Search for entry content' icon='search'/>
+                </Form>
             </div>
         )
     }

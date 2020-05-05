@@ -9,7 +9,7 @@ class EntriesContainer extends Component {
         searchTerm: ''
     }
     dynamicSearch = () =>{
-        return this.props.entries.filter(entry => entry.text.includes(this.state.searchTerm))
+        return this.props.entries.filter(entry => entry.text.toLowerCase().includes(this.state.searchTerm))
     }
 
     searchTermChange = (e) =>{
@@ -18,7 +18,7 @@ class EntriesContainer extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{display: 'inline-block',  marginLeft: '15vw', marginTop:'2vh'}}>
                 <EntrySearch 
                     searchTerm = {this.state.searchTerm}
                     searchTermChange = {this.searchTermChange}

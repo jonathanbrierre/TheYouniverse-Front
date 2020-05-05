@@ -56,7 +56,7 @@ class NewEntryModal extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{width: '50%'}}>
                 <Button onClick = {this.toggleModal}>New Entry</Button>
                 <Modal open ={this.state.open} >
                     <Modal.Header>What's on your mind?</Modal.Header>

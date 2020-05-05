@@ -27,12 +27,6 @@ class JournalContainer extends Component {
             <div>
                 <MainNav/>
                 <Header/>
-                <Header/>
-                <Header/>
-                <Header/>
-                <Header/>
-                <Header/>
-                <Header/>
                 <NewEntryModal/>
                 <EntriesContainer/>
             </div>

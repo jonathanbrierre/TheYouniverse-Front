@@ -49,15 +49,18 @@ class Entry extends React.Component {
 
     render(){
             return (
-            <div>
-                <Card>
+            <div style ={{marginTop: '2%', marginBottom: '4%'}}>
+                <Card style ={{width: '70vw'}}>
                     <Card.Content>
                         {/* <Image
                         floated='right'
                         size='mini'
                         src='/images/avatar/large/steve.jpg'
                         /> */}
-                        <Card.Header>{this.splitDate()}</Card.Header>
+                        <div style ={{textAlign: 'right'}}>
+
+                        <h3>{this.splitDate()}</h3>
+                        </div>
                         {/* <Card.Meta>Friends of Elliot</Card.Meta> */}
                         <Card.Description>
                         {this.props.entry.text}
@@ -66,7 +69,7 @@ class Entry extends React.Component {
                     <Card.Content extra>
                         {/* <div className='ui two buttons'> */}
                         <EditEntryModal entry = {this.props.entry}/>
-                        <Button basic color='red' onClick = {this.deleteEntry}>
+                        <Button basic color='red' onClick = {this.deleteEntry} style = {{float: 'right'}}>
                             Delete
                         </Button>
                         {/* </div> */}
