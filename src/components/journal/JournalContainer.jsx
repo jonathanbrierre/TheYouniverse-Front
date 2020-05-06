@@ -26,8 +26,10 @@ class JournalContainer extends Component {
             //Conditionally render this for if a user is logged in or not
             <div>
                 <MainNav/>
-                <Header/>
-                <NewEntryModal/>
+                <div style = {{paddingLeft:'4vw', paddingTop:'3vh'}}>
+                    <Header/>
+                    <NewEntryModal/>
+                </div>
                 <EntriesContainer/>
             </div>
         )

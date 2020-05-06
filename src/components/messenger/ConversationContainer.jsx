@@ -4,6 +4,7 @@ import UserListContainer from './Lists/UserListContainer'
 import {clearConvos} from '../../actions/MessengerActions'
 import {connect} from 'react-redux'
 import  MessagesContainer  from './Messages/MessagesContainer';
+import StartConvoModal from './StartConvoModal'
 
 
 
@@ -16,9 +17,9 @@ class ConversationContainer extends Component {
     showListOrMessages = () => {
         if(this.props.user.id){
             if(this.props.match.params.id){
-                return (<MessagesContainer convoId = {this.props.match.params.id} user = {this.props.user}/>)
+                return (<MessagesContainer convoId = {this.props.match.params.id} user = {this.props.user}/> )
             }else{
-                return (<UserListContainer user = {this.props.user} token = {this.props.token}/>)
+                return (<div><UserListContainer user = {this.props.user} token = {this.props.token}/><StartConvoModal/></div>)
             }
         }else{
             return null

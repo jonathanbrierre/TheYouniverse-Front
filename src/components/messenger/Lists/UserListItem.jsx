@@ -6,14 +6,6 @@ import {updateNotif} from '../../../actions/MessengerActions'
 import {connect} from 'react-redux'
 class UserListItem extends Component {
 
-    // state = {
-    //     updated: false
-    // }
-
-    // componentDidMount(){
-    //     this.setState({updated: this.props.convo.updated})
-    // }
-    
 
     onClick = () =>{
         this.props.history.push(`/messenger/${this.props.convo.id}`)
