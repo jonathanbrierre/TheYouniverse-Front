@@ -19,7 +19,7 @@ class ConversationContainer extends Component {
             if(this.props.match.params.id){
                 return (<MessagesContainer convoId = {this.props.match.params.id} user = {this.props.user}/> )
             }else{
-                return (<div><UserListContainer user = {this.props.user} token = {this.props.token}/><StartConvoModal/></div>)
+                return (<div><UserListContainer user = {this.props.user} token = {this.props.token}/><br></br><StartConvoModal/></div>)
             }
         }else{
             return null

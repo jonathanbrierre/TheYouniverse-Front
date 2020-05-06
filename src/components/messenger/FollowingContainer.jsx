@@ -5,11 +5,15 @@ import Following from './Following'
 class FollowingContainer extends Component {
 
     displayFollowings = () => {
-        return this.props.followings.map(following => <Following key = {following.id} following = {following}/>)
+        return this.props.followings.map(following => {
+            if(following.username.toLowerCase().includes(this.props.searchTerm)){
+                return <Following key = {following.id} following = {following}/>
+            }
+        })
     }
     render() {
         return (
-            <div style = {{height: '25vh', overflow: 'scroll'}}>
+            <div style = {{height: '35vh', overflow: 'scroll'}}>
                 {this.displayFollowings()}
             </div>
         )

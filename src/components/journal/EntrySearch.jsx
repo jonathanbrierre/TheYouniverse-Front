@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button, Form, Modal } from 'semantic-ui-react'
+import {Form } from 'semantic-ui-react'
 class EntrySearch extends Component {
 
     render() {

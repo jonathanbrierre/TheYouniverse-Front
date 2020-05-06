@@ -13,7 +13,8 @@ class Post extends React.Component  {
     state = {
         content: '',
         editBool: false,
-        showComments: false
+        showComments: false,
+        lengthLimit: 400
     }
 
     deletePostFetch = () => {
@@ -43,22 +44,27 @@ class Post extends React.Component  {
     }
 
     onSubmitEdit = (e) => {
+
         e.preventDefault()
-        fetch(`http://localhost:3000/posts/${this.props.post.id}`,{
-            method: 'PATCH',
-            headers:{
-                'Authorization': `bearer ${this.props.token}`,
-                'content-type': 'application/json',
-                accept: 'application/json'
-            },
-            body: JSON.stringify({content: this.state.content})
-        })
-            .then(resp => resp.json())
-            .then(data =>{
-                Swal.fire({icon: 'success', text:'Successful Edit'})
-                this.props.editPost(data)
-                this.setState({editBool: false})
+        if(this.state.content.length <= 400){
+            fetch(`http://localhost:3000/posts/${this.props.post.id}`,{
+                method: 'PATCH',
+                headers:{
+                    'Authorization': `bearer ${this.props.token}`,
+                    'content-type': 'application/json',
+                    accept: 'application/json'
+                },
+                body: JSON.stringify({content: this.state.content})
             })
+                .then(resp => resp.json())
+                .then(data =>{
+                    Swal.fire({icon: 'success', text:'Successful Edit'})
+                    this.props.editPost(data)
+                    this.setState({editBool: false})
+                })
+        }else {
+            Swal.fire({icon:'error', text: 'Character Limit Exceeded'})
+        }
     }
 
     onChangeEdit = (e) => {
@@ -69,7 +75,9 @@ class Post extends React.Component  {
         return(
             <Form onSubmit = {this.onSubmitEdit}>
                 <Form.TextArea type='text' name= 'content' value ={this.state.content} onChange = {this.onChangeEdit} />
-                <Button type = 'submit' >Submit</Button>
+                Character count: {this.state.lengthLimit - this.state.content.length}
+                <br></br>
+                < Button type = 'submit' disabled ={this.state.content.length > 0 ? false:true}>Submit</Button>
             </Form>
         )
     }
