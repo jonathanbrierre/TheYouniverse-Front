@@ -55,6 +55,7 @@ class CreatePostModal extends Component {
     closeModal = () => {
         this.setState({modalOpen:false})
     }
+    
     render() {
         return (
             <div className='modal'>

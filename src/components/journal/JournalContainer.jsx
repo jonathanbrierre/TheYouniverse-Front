@@ -5,6 +5,7 @@ import MainNav from '../navigation/MainNav'
 import NewEntryModal from './NewEntryModal'
 import {userEntries} from '../../actions/JournalActions'
 import EntriesContainer from './EntriesContainer'
+import WhatIsThis from './WhatIsThis'
 
 
 class JournalContainer extends Component {
@@ -29,6 +30,8 @@ class JournalContainer extends Component {
                 <div style = {{paddingLeft:'4vw', paddingTop:'3vh'}}>
                     <Header/>
                     <NewEntryModal/>
+                    <br></br>
+                    <WhatIsThis/>
                 </div>
                 <EntriesContainer/>
             </div>

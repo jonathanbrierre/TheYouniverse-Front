@@ -44,7 +44,6 @@ class Post extends React.Component  {
     }
 
     onSubmitEdit = (e) => {
-
         e.preventDefault()
         if(this.state.content.length <= 400){
             fetch(`http://localhost:3000/posts/${this.props.post.id}`,{
