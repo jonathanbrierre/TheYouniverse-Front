@@ -9,7 +9,7 @@ class NewMessageForm extends Component {
 
     onSubmit = (e) => {
         e.preventDefault()
-        fetch(`http://localhost:3000/messages`,{
+        fetch(`http://theyouniverse.herokuapp.com/messages`,{
             method: 'POST',
             headers:{
                 'Authorization': `bearer ${this.props.token}`,

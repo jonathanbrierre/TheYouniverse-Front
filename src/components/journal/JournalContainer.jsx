@@ -13,7 +13,7 @@ class JournalContainer extends Component {
     componentDidMount(){
         if(localStorage.getItem('token')){
             let token = localStorage.getItem('token')
-            fetch(`http://localhost:3000/user_entries`, {headers: {'Authorization': `bearer  ${token}`}})
+            fetch(`http://theyouniverse.herokuapp.com/user_entries`, {headers: {'Authorization': `bearer  ${token}`}})
                 .then(resp => resp.json())
                 .then(data => {
                     this.props.userEntries(data.entries)

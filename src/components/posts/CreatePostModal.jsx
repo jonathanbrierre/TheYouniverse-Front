@@ -21,7 +21,7 @@ class CreatePostModal extends Component {
     onSubmit = (e) => {
         e.preventDefault()
         if(this.state.lengthLimit - this.state.content.length >= 0){
-            fetch('http://localhost:3000/posts',{
+            fetch('http://theyouniverse.herokuapp.com/posts',{
                 method: "POST",
                 headers:{
                     'Authorization': `bearer ${this.props.token}`,

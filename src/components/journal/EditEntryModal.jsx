@@ -29,7 +29,7 @@ class EditEntryModal extends Component {
             return
         }
         if(this.state.lengthLimit - this.state.entry.length >= 0){
-            fetch(`http://localhost:3000/entries/${this.props.entry.id}`, {
+            fetch(`http://theyouniverse.herokuapp.com/entries/${this.props.entry.id}`, {
                 method: 'PATCH',
                 headers: {
                     'Authorization': `bearer ${this.props.token}`,
@@ -81,8 +81,6 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = {
-    
-}
+
 
 export default connect(mapStateToProps, {updateEntry})(EditEntryModal)

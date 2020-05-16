@@ -8,7 +8,7 @@ class UserListContainer extends Component {
 
     componentDidMount(){
         if(this.props.user.id){
-            fetch(`http://localhost:3000/conversations/${this.props.user.id}`)
+            fetch(`http://theyouniverse.herokuapp.com/conversations/${this.props.user.id}`)
             .then(resp => resp.json())
             .then(data => {
                 console.log(data)

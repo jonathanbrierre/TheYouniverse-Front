@@ -6,7 +6,7 @@ import {withRouter} from 'react-router-dom'
 class Following extends Component {
 
     onClickConvo = () => {
-        fetch(`http://localhost:3000/conversations`,{
+        fetch(`http://theyouniverse.herokuapp.com/conversations`,{
             method: 'POST',
             headers:{
                 'Authorization': `bearer ${this.props.token}`,

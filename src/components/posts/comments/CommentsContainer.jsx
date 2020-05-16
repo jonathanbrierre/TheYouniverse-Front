@@ -8,7 +8,7 @@ class CommentsContainer extends Component {
     }
 
     componentDidMount(){
-        fetch(`http://localhost:3000/get_comments/${this.props.post.id}`)
+        fetch(`http://theyouniverse.herokuapp.com/get_comments/${this.props.post.id}`)
         .then(r => r.json())
         .then(commentsArray => {
             if(commentsArray[0]){

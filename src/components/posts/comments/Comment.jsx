@@ -12,7 +12,7 @@ class Comment extends Component {
     }
 
     deleteComment = () => {
-        fetch(`http://localhost:3000/comments/${this.props.comment.id}`, {method: 'DELETE', headers:{ 'Authorization': `bearer ${this.props.token}` }})
+        fetch(`http://theyouniverse.herokuapp.com/comments/${this.props.comment.id}`, {method: 'DELETE', headers:{ 'Authorization': `bearer ${this.props.token}` }})
         .then(r=>r.json())
         .then(data => {
             this.props.removeCommentFromState(this.props.comment.id)
@@ -20,7 +20,7 @@ class Comment extends Component {
     }
 
     onSubmitEdit = () => {
-        fetch(`http://localhost:3000/comments/${this.props.comment.id}`, {
+        fetch(`http://theyouniverse.herokuapp.com/comments/${this.props.comment.id}`, {
             method: 'PATCH',
             headers: {
                 'Authorization': `bearer ${this.props.token}`,

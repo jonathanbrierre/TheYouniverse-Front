@@ -21,7 +21,7 @@ class App extends React.Component {
     componentDidMount(){
       if(localStorage.getItem('token')){
           let token = localStorage.getItem('token')
-          fetch('http://localhost:3000/persist',{
+          fetch('http://theyouniverse.herokuapp.com/persist',{
               headers: {
                   'Authorization': `bearer  ${token}`
               }
@@ -34,10 +34,10 @@ class App extends React.Component {
               }
           })
         }
-        fetch('http://localhost:3000/topics')
+        fetch('http://theyouniverse.herokuapp.com/topics')
           .then(resp => resp.json())
           .then(this.props.getAllTopics)
-          console.log('hello');
+          
           
   }
 

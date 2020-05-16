@@ -43,7 +43,7 @@ class Profile extends Component {
 
     onEditFormSubmit = (e) => {
         e.preventDefault()
-        fetch(`http://localhost:3000/users/${this.props.user.id}`, {
+        fetch(`http://theyouniverse.herokuapp.com/users/${this.props.user.id}`, {
             method: 'PATCH',
             headers: {
                 'Authorization': `bearer ${this.props.token}`,
@@ -75,7 +75,7 @@ class Profile extends Component {
         })
         .then((willDelete) => {
             if (willDelete) {
-                fetch(`http://localhost:3000/users/${this.props.user.id}`, {method: 'DELETE', headers:{'Authorization': `bearer ${this.props.token}`}})
+                fetch(`http://theyouniverse.herokuapp.com/users/${this.props.user.id}`, {method: 'DELETE', headers:{'Authorization': `bearer ${this.props.token}`}})
                     .then(resp=> resp.json())
                     .then(data => {
                         localStorage.clear()
@@ -125,7 +125,7 @@ class Profile extends Component {
     }
 
     onClickConvo = () => {
-        fetch(`http://localhost:3000/conversations`,{
+        fetch(`http://theyouniverse.herokuapp.com/conversations`,{
             method: 'POST',
             headers:{
                 'Authorization': `bearer ${this.props.userToken}`,
@@ -171,13 +171,13 @@ class Profile extends Component {
 
     onClickFollowing = () => {
         if(this.props.followee){
-            fetch(`http://localhost:3000/followings/${this.props.followeeObj.id}`, {method: 'DELETE', headers:{'Authorization': `bearer ${this.props.userToken}`}})
+            fetch(`http://theyouniverse.herokuapp.com/followings/${this.props.followeeObj.id}`, {method: 'DELETE', headers:{'Authorization': `bearer ${this.props.userToken}`}})
             .then(resp => resp.json())
             .then(data => {
                 this.props.handleUnfollow(this.props.followeeObj, this.props.currentUser)
             })
         }else{
-            fetch(`http://localhost:3000/followings`, {
+            fetch(`http://theyouniverse.herokuapp.com/followings`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `bearer ${this.props.userToken}`,
