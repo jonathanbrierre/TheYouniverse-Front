@@ -9,7 +9,7 @@ class UserListItem extends Component {
 
     onClick = () =>{
         this.props.history.push(`/messenger/${this.props.convo.id}`)
-        fetch(`http://theyouniverse.herokuapp.com/checked/${this.props.convo.id}/`)
+        fetch(`https://theyouniverse.herokuapp.com/checked/${this.props.convo.id}/`)
             .then(resp => resp.json())
             .then(this.setState({updated: false}))
     }
