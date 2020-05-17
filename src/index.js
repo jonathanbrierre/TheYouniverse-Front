@@ -13,7 +13,7 @@ const store = createStore(combined, window.__REDUX_DEVTOOLS_EXTENSION__ && windo
 ReactDOM.render(
     <Provider store ={store} >
         <BrowserRouter>
-            <ActionCableProvider url='ws://localhost:3000/cable'>
+            <ActionCableProvider url='ws://theyouniverse.herokuapp.com/cable'>
                     <App />
             </ActionCableProvider>
         </BrowserRouter>

@@ -123,6 +123,7 @@
 .homeDiv{
     color:white;
     position: fixed;
+    width: 90vw;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
