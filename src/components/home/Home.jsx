@@ -45,7 +45,7 @@ class Home extends Component {
 
     onSubmit = e => {
         e.preventDefault()
-        fetch('http://theyouniverse.herokuapp.com/users',{
+        fetch('https://theyouniverse.herokuapp.com/users',{
             method: 'POST',
             headers: {
                 'content-type': 'application/json',

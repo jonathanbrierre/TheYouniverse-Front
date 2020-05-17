@@ -15,7 +15,7 @@ class Login extends React.Component {
 
     onSubmit = e => {
         e.preventDefault()
-        fetch('http://theyouniverse.herokuapp.com/login',{
+        fetch('https://theyouniverse.herokuapp.com/login',{
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
