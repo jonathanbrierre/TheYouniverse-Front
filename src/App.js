@@ -21,9 +21,10 @@ class App extends React.Component {
     componentDidMount(){
       if(localStorage.getItem('token')){
           let token = localStorage.getItem('token')
-          fetch('https://theyouniverse.herokuapp.com/persist',{
+          fetch('https://cors-anywhere.herokuapp.com/https://theyouniverse.herokuapp.com/persist',{
               headers: {
-                  'Authorization': `bearer  ${token}`
+                  'Authorization': `bearer  ${token}`,
+                  'Allow-Control-Allow-Origin': '*'
               }
           })
           .then(r => r.json())
@@ -34,7 +35,7 @@ class App extends React.Component {
               }
           })
         }
-        fetch('https://theyouniverse.herokuapp.com/topics')
+        fetch('https://cors-anywhere.herokuapp.com/https://theyouniverse.herokuapp.com/topics', {headers: {'Allow-Control-Allow-Origin': '*'}})
           .then(resp => resp.json())
           .then(this.props.getAllTopics)
           
