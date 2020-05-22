@@ -29,7 +29,7 @@ class StartConvoModal extends Component {
         if(this.state.selection === 'Follower'){
             return(
                 <div>
-                    <h3>Your followers</h3> - 
+                    <h3>Your followers</h3> 
                     <SearchBar searchTerm = {this.state.searchTerm} searchTermChange = {this.searchTermChange} />
                     <br></br>
                     <FollowingContainer followings = {this.props.followers} searchTerm = {this.state.searchTerm}/>
