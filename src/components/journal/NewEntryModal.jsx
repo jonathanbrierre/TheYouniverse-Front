@@ -29,7 +29,9 @@ class NewEntryModal extends Component {
             return
         }
         if(this.state.lengthLimit - this.state.entry.length >= 0){
-            fetch('https://theyouniverse.herokuapp.com/entries', {
+            let testUrl = 'http://localhost:3000/entries'
+            let deployedUrl = 'https://theyouniverse.herokuapp.com/entries'
+            fetch(testUrl, {
                 method: 'POST',
                 headers: {
                     'Authorization': `bearer ${this.props.token}`,

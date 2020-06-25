@@ -4,7 +4,11 @@ import {connect} from 'react-redux'
 import { Button, Form, Modal } from 'semantic-ui-react'
 import Swal from 'sweetalert2'
 
+
+
 class Comment extends Component {
+
+    
 
     state = {
         edit: '', 
@@ -12,7 +16,10 @@ class Comment extends Component {
     }
 
     deleteComment = () => {
-        fetch(`http://theyouniverse.herokuapp.com/comments/${this.props.comment.id}`, {method: 'DELETE', headers:{ 'Authorization': `bearer ${this.props.token}` }})
+        let testUrl = `http://localhost:3000/comments/${this.props.comment.id}`
+        let deployedUrl = `http://theyouniverse.herokuapp.com/comments/${this.props.comment.id}`
+        
+        fetch(testUrl, {method: 'DELETE', headers:{ 'Authorization': `bearer ${this.props.token}` }})
         .then(r=>r.json())
         .then(data => {
             this.props.removeCommentFromState(this.props.comment.id)
@@ -20,7 +27,9 @@ class Comment extends Component {
     }
 
     onSubmitEdit = () => {
-        fetch(`http://theyouniverse.herokuapp.com/comments/${this.props.comment.id}`, {
+        let testUrl = `http://localhost:3000/comments/${this.props.comment.id}`
+        let deployedUrl = `http://theyouniverse.herokuapp.com/comments/${this.props.comment.id}`
+        fetch(testUrl, {
             method: 'PATCH',
             headers: {
                 'Authorization': `bearer ${this.props.token}`,

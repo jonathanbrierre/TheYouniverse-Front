@@ -20,8 +20,10 @@ class App extends React.Component {
 
     componentDidMount(){
       if(localStorage.getItem('token')){
+        let testUrlOne = 'http://localhost:3000/persist'
+        let deployedUrlOne = 'https://fierce-shore-17893.herokuapp.com/https://theyouniverse.herokuapp.com/persist'
           let token = localStorage.getItem('token')
-          fetch('https://fierce-shore-17893.herokuapp.com/https://theyouniverse.herokuapp.com/persist',{
+          fetch(testUrlOne,{
               headers: {
                   'Authorization': `bearer  ${token}`,
                   'Allow-Control-Allow-Origin': '*'
@@ -35,7 +37,9 @@ class App extends React.Component {
               }
           })
         }
-        fetch('https://fierce-shore-17893.herokuapp.com/https://theyouniverse.herokuapp.com/topics', {headers: {'Allow-Control-Allow-Origin': '*'}})
+        let testUrlTwo = 'http://localhost:3000/topics'
+        let deployedUrlTwo = 'https://fierce-shore-17893.herokuapp.com/https://theyouniverse.herokuapp.com/topics'
+        fetch(testUrlTwo, {headers: {'Allow-Control-Allow-Origin': '*'}})
           .then(resp => resp.json())
           .then(this.props.getAllTopics)
           

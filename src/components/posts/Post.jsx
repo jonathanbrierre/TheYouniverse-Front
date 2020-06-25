@@ -18,7 +18,9 @@ class Post extends React.Component  {
     }
 
     deletePostFetch = () => {
-        fetch(`https://ltheyouniverse.herokuapp.com/posts/${this.props.post.id}`,{method: "DELETE", headers: {'Authorization': `bearer ${this.props.token}`}})
+        let testUrl = `http://localhost:3000/posts/${this.props.post.id}`
+        let deployedUrl = `https://theyouniverse.herokuapp.com/posts/${this.props.post.id}`
+        fetch(testUrl,{method: "DELETE", headers: {'Authorization': `bearer ${this.props.token}`}})
         .then(r=>r.json())
         .then(data => {
             this.props.deletePost(this.props.post.id)
@@ -46,7 +48,9 @@ class Post extends React.Component  {
     onSubmitEdit = (e) => {
         e.preventDefault()
         if(this.state.content.length <= 400){
-            fetch(`https://ltheyouniverse.herokuapp.com/posts/${this.props.post.id}`,{
+            let testUrl = `http://localhost:3000/posts/${this.props.post.id}`
+            let deployedUrl = `https://theyouniverse.herokuapp.com/posts/${this.props.post.id}`
+            fetch(testUrl,{
                 method: 'PATCH',
                 headers:{
                     'Authorization': `bearer ${this.props.token}`,
@@ -91,7 +95,9 @@ class Post extends React.Component  {
 
     onClickProfile = () => {
         // console.log(this.props)
-        fetch(`https://ltheyouniverse.herokuapp.com/profile/${this.props.post.user.id}`)
+        let testUrl = `http://localhost:3000/profile/${this.props.post.user.id}`
+        let deployedUrl = `https://theyouniverse.herokuapp.com/profile/${this.props.post.user.id}`
+        fetch(testUrl)
         .then(resp=> resp.json())
         .then(this.props.selectUser)
     }

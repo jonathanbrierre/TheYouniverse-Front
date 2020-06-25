@@ -26,7 +26,9 @@ class TopicPostsCont extends Component {
 
     fetchTopicPosts = () => {
         let slug = this.props.match.params.slug
-        fetch(`https://theyouniverse.herokuapp.com/posts/${slug}/${this.state.pageCounter}`)
+        let testUrl = `http://localhost:3000/posts/${slug}/${this.state.pageCounter}`
+        let deployedUrl = `https://theyouniverse.herokuapp.com/posts/${slug}/${this.state.pageCounter}`
+        fetch(testUrl)
         .then(resp => resp.json())
         .then(posts => {
             if(posts){

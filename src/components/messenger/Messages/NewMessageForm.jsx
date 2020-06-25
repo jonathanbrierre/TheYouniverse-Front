@@ -9,7 +9,9 @@ class NewMessageForm extends Component {
 
     onSubmit = (e) => {
         e.preventDefault()
-        fetch(`https://theyouniverse.herokuapp.com/messages`,{
+        let testUrl = `http://localhost:3000/messages`
+        let deployedUrl = `https://theyouniverse.herokuapp.com/messages`
+        fetch(testUrl,{
             method: 'POST',
             headers:{
                 'Authorization': `bearer ${this.props.token}`,

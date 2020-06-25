@@ -29,7 +29,10 @@ class EditEntryModal extends Component {
             return
         }
         if(this.state.lengthLimit - this.state.entry.length >= 0){
-            fetch(`https://theyouniverse.herokuapp.com/entries/${this.props.entry.id}`, {
+            let testUrl = `http://localhost:3000/entries/${this.props.entry.id}`
+            let deployedUrl = `https://theyouniverse.herokuapp.com/entries/${this.props.entry.id}`
+
+            fetch(testUrl, {
                 method: 'PATCH',
                 headers: {
                     'Authorization': `bearer ${this.props.token}`,

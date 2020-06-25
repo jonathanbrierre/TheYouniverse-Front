@@ -45,7 +45,10 @@ class Home extends Component {
 
     onSubmit = e => {
         e.preventDefault()
-        fetch('https://theyouniverse.herokuapp.com/users',{
+        let testUrl = 'http://localhost:3000/users'
+        let deployedURl = `https://theyouniverse.herokuapp.com/users`
+
+        fetch(testUrl,{
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -100,7 +103,7 @@ class Home extends Component {
                                 </Form>
                             </Modal.Content>
                     </Modal>
-             </div>
+            </div>
         )
     }
 }

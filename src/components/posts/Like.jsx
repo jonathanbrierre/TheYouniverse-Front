@@ -30,7 +30,9 @@ export class Like extends Component {
 
     onClickLike = () => {
         if(this.state.liked){
-            fetch(`https://theyouniverse.herokuapp.com/likes/${this.state.likeObj.id}`,{
+            let testUrl = `http://localhost:3000/likes/${this.state.likeObj.id}`
+            let deployedUrl = `https://theyouniverse.herokuapp.com/likes/${this.state.likeObj.id}`
+            fetch(testUrl,{
                 method: 'DELETE',
                 headers: {
                     'Authorization': `bearer ${this.props.token}`
@@ -42,8 +44,9 @@ export class Like extends Component {
                 this.setState({liked: false, likeObj: {}})
             })
         }else{
-            
-            fetch(`https://theyouniverse.herokuapp.com/likes`,{
+            let testUrl = `http://localhost:3000/likes`
+            let deployedURl = `https://theyouniverse.herokuapp.com/likes`
+            fetch(testUrl,{
                 method: 'POST',
                 headers: {
                     'Authorization': `bearer ${this.props.token}`,

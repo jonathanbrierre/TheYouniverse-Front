@@ -43,7 +43,9 @@ class Profile extends Component {
 
     onEditFormSubmit = (e) => {
         e.preventDefault()
-        fetch(`https://theyouniverse.herokuapp.com/users/${this.props.user.id}`, {
+        let testUrl = `http://localhost:3000/users/${this.props.user.id}`
+        let deployedUrl = `https://theyouniverse.herokuapp.com/users/${this.props.user.id}`
+        fetch(testUrl, {
             method: 'PATCH',
             headers: {
                 'Authorization': `bearer ${this.props.token}`,
@@ -75,7 +77,9 @@ class Profile extends Component {
         })
         .then((willDelete) => {
             if (willDelete) {
-                fetch(`https://theyouniverse.herokuapp.com/users/${this.props.user.id}`, {method: 'DELETE', headers:{'Authorization': `bearer ${this.props.token}`}})
+                let testUrl = `http://localhost:3000/users/${this.props.user.id}`
+                let deployedUrl = `https://theyouniverse.herokuapp.com/users/${this.props.user.id}`
+                fetch(testUrl, {method: 'DELETE', headers:{'Authorization': `bearer ${this.props.token}`}})
                     .then(resp=> resp.json())
                     .then(data => {
                         localStorage.clear()
@@ -125,7 +129,9 @@ class Profile extends Component {
     }
 
     onClickConvo = () => {
-        fetch(`https://theyouniverse.herokuapp.com/conversations`,{
+        let testUrl = `http://localhost:3000/conversations`
+        let deployedUrl = `https://theyouniverse.herokuapp.com/conversations`
+        fetch(testUrl,{
             method: 'POST',
             headers:{
                 'Authorization': `bearer ${this.props.userToken}`,
@@ -171,13 +177,17 @@ class Profile extends Component {
 
     onClickFollowing = () => {
         if(this.props.followee){
-            fetch(`https://theyouniverse.herokuapp.com/followings/${this.props.followeeObj.id}`, {method: 'DELETE', headers:{'Authorization': `bearer ${this.props.userToken}`}})
+            let testUrl = `http://localhost:3000/followings/${this.props.followeeObj.id}`
+            let deployedUrl = `https://theyouniverse.herokuapp.com/followings/${this.props.followeeObj.id}`
+            fetch(testUrl, {method: 'DELETE', headers:{'Authorization': `bearer ${this.props.userToken}`}})
             .then(resp => resp.json())
             .then(data => {
                 this.props.handleUnfollow(this.props.followeeObj, this.props.currentUser)
             })
         }else{
-            fetch(`https://theyouniverse.herokuapp.com/followings`, {
+            let testUrl = `http://localhost:3000/followings`
+            let deployedUrl = `https://theyouniverse.herokuapp.com/followings`
+            fetch(testUrl, {
                 method: 'POST',
                 headers: {
                     'Authorization': `bearer ${this.props.userToken}`,

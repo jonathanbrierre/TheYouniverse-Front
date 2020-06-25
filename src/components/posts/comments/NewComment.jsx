@@ -13,7 +13,9 @@ export class NewComment extends Component {
 
     onSubmit = (e) => {
         e.preventDefault()
-        fetch(`http://theyouniverse.herokuapp.com/comments`, {
+        let testUrl = `http://localhost:3000/comments`
+        let deployedUrl = `http://theyouniverse.herokuapp.com/comments`
+        fetch(testUrl, {
             method: 'POST',
             headers:{
                 'Authorization': `bearer ${this.props.token}`,

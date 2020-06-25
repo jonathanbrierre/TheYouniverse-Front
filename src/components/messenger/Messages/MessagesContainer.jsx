@@ -14,15 +14,18 @@ class MessagesContainer extends Component {
     }
 
     componentDidMount(){
-
-        fetch(`https://theyouniverse.herokuapp.com/messages/${this.props.convoId}/`)
+        let testUrlOne =`http://localhost:3000/messages/${this.props.convoId}/`
+        let deployedUrlOne =`https://theyouniverse.herokuapp.com/messages/${this.props.convoId}/`
+        fetch(testUrlOne)
         .then(resp => resp.json())
         .then(data => {
             console.log(data)
             this.setState({messages: data}, () => this.scrollToBottom())
         })
 
-        fetch(`https://theyouniverse.herokuapp.com/messages/${this.props.convoId}/${this.props.user.id}`)
+        let testUrlTwo = `http://localhost:3000/messages/${this.props.convoId}/${this.props.user.id}`
+        let deployedUrlTwo = `https://theyouniverse.herokuapp.com/messages/${this.props.convoId}/${this.props.user.id}`
+        fetch(testUrlTwo)
         .then(resp => resp.json())
         .then(data => {
             this.setState({conversee: data})

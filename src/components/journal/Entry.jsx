@@ -31,7 +31,9 @@ class Entry extends React.Component {
         })
         .then((willDelete) => {
             if (willDelete) {
-                fetch(`https://theyouniverse.herokuapp.com/entries/${this.props.entry.id}`,{method: 'DELETE', headers: {'Authorization': `bearer ${this.props.token}`}})
+                let testUrl = `http://localhost:3000/entries/${this.props.entry.id}`
+                let deployedUrl = `https://theyouniverse.herokuapp.com/entries/${this.props.entry.id}`
+                fetch(testUrl,{method: 'DELETE', headers: {'Authorization': `bearer ${this.props.token}`}})
                 .then(resp => resp.json())
                 .then(data => {
                     if(data.message === 'Successfully Deleted'){

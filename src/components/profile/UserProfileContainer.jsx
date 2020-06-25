@@ -12,7 +12,9 @@ class UserProfileContainer extends Component {
         if(this.props.selectedUser.id ){
                 return (<Profile user ={this.props.selectedUser} />)
         }else if(this.props.user.id !== parseInt(this.props.match.params.id)){
-            fetch(`https://theyouniverse.herokuapp.com/profile/${this.props.match.params.id}`)
+            let testUrl = `http://localhost:3000/profile/${this.props.match.params.id}`
+            let deployedUrl = `https://theyouniverse.herokuapp.com/profile/${this.props.match.params.id}`
+            fetch(testUrl)
             .then(resp=> resp.json())
             .then(data => {
                 if(data.id){
